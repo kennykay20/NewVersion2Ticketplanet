@@ -1,0 +1,373 @@
+﻿<!DOCTYPE html>
+<!--
+Template Name: Movie Pro
+Version: 1.0.0
+Author: Webstrot
+
+-->
+<!--[if IE 8]> <html lang="en" class="ie8 no-js"> <![endif]-->
+<!--[if IE 9]> <html lang="en" class="ie9 no-js"> <![endif]-->
+<!--[if !IE]><!-->
+<html lang="zxx">
+<!--[endif]-->
+
+<head>
+    <meta charset="utf-8" />
+    <title>Ticket Planet</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <meta name="description" content="Ticket Planet" />
+    <meta name="keywords" content="Ticket Planet" />
+    <meta name="author" content="" />
+    <meta name="MobileOptimized" content="320" />
+    <!--Template style -->
+    <link rel="stylesheet" type="text/css" href="~/css/animate.css" />
+    <link rel="stylesheet" type="text/css" href="~/css/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" href="~/css/font-awesome.css" />
+    <link rel="stylesheet" type="text/css" href="~/css/fonts.css" />
+    <link rel="stylesheet" type="text/css" href="~/css/flaticon.css" />
+    <link rel="stylesheet" type="text/css" href="~/css/owl.carousel.css" />
+    <link rel="stylesheet" type="text/css" href="~/css/owl.theme.default.css" />
+    <link rel="stylesheet" type="text/css" href="~/css/dl-menu.css" />
+    <link rel="stylesheet" type="text/css" href="~/css/nice-select.css" />
+    <link rel="stylesheet" type="text/css" href="~/css/magnific-popup.css" />
+    <link rel="stylesheet" type="text/css" href="~/css/venobox.css" />
+    <link rel="stylesheet" type="text/css" href="~/css/slick.css" />
+    <link rel="stylesheet" type="text/css" href="~/css/style2.css" />
+    <link rel="stylesheet" type="text/css" href="~/css/style.css" />
+    
+    @*<link rel="stylesheet" type="text/css" href="~/css/slick-theme.css" />*@
+    
+    <link href="~/css/chatStyle.css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="~/css/responsive2.css" />
+    @*<script src="~/js/ticketplanetjs/scriptFiles.js"></script>*@
+    <link rel="stylesheet" type="text/css" href="~/css/magnific-popup.css" />
+    <link rel="stylesheet" type="text/css" href="~/css/venobox.css" />
+    <link rel="stylesheet" type="text/css" href="~/js/plugin/rs_slider/layers.css" />
+    <link rel="stylesheet" type="text/css" href="~/js/plugin/rs_slider/navigation.css" />
+    <link rel="stylesheet" type="text/css" href="~/js/plugin/rs_slider/settings.css" />
+    
+    <link rel="stylesheet" id="theme-color" type="text/css" href="#" />
+    <link href="~/js/ticketplanetjs/alertify.core.css" rel="stylesheet" />
+    <link href="~/js/ticketplanetjs/alertify.default.css" rel="stylesheet" />
+    <link rel="stylesheet" id="r" type="text/css" href="#" />
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
+    <!-- FLUTTER WAVE PLUGINS-->
+    <script src="https://api.ravepay.co/flwv3-pug/getpaidx/api/flwpbf-inline.js"></script>
+    <link href="~/css/w3.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <!-- favicon links -->
+    <link rel="icon" href="images/header/tplogo.png" type="image/png" sizes="32x32" />
+
+    
+</head>
+
+<body>
+    <!-- preloader Start -->
+    @*<div id="preloader">
+        <div id="status">
+            <img src="~/images/header/horoscope.gif" id="preloader_image" alt="loader">
+            <br /><br />
+            <p class="text-center" style="font-weight:bold; font-size:x-large; color:black;">..Loading Please..</p>
+        </div>
+    </div>*@
+    <!-- preloader End -->
+   
+    <!-- prs Slider Start -->
+    <div class="prs_navigation_main_wrapper">
+        <div class="container-fluid">
+            <div id="search_open" class="gc_search_box">
+               
+            </div>
+            <div class="prs_navi_left_main_wrapper">
+                <div class="prs_logo_main_wrapper">
+                        <a href="@Url.Action("Index", "Home")">
+                            <img src="~/images/header/newlogo.jpeg" width="182"  alt="logo" />
+                        </a>
+                </div>
+                <div class="prs_menu_main_wrapper">
+                    <nav class="navbar navbar-default">
+                        <div id="dl-menu" class="xv-menuwrapper responsive-menu">
+                            <button class="dl-trigger">
+                                <!----here is the mobile bar logo click -->
+                                <img src="~/images/header/bars.png" alt="bar_png">
+                            </button>
+                            <div class="clearfix"></div>
+                            <ul class="dl-menu">
+                                <!-----Here is the Main Menu-->
+                                <li class="parent">
+                                    <a href="@Url.Action("Index", "Home")">Home</a>
+
+                                </li>
+                                <li class="parent megamenu">
+                                    <a href="@Url.Action("Index", "Events")">Events</a>
+
+                                </li>
+                                <li class="parent">
+                                    <a href="@Url.Action("Index", "Movies")">Movies</a>
+
+                                </li>
+
+                                <li class="parent">
+                                    <a href="@Url.Action("Flights", "Events")">Flights</a>
+
+                                </li>
+                                <li class="parent megamenu">
+                                    <a href="http://uploadevent.ticketplanet.ng">Create Event(s)</a>
+
+                                </li>
+                                <li class="parent">
+                                    <a href="@Url.Action("Contact", "Home")">contact</a>
+                                </li>
+                                @*<li class="parent">
+            <a href="">Blogs</a>
+        </li>*@
+                            </ul>
+                        </div>
+                        <!-- /dl-menuwrapper -->
+                    </nav>
+                </div>
+            </div>
+            <div class="prs_navi_right_main_wrapper">
+                <div class="prs_slidebar_wrapper">
+                    <button class="second-nav-toggler" type="button" style="background-color:#337ab7">
+                        <img src="~/images/header/bars.png" alt="bar_png">
+                    </button>
+                </div>
+            </div>
+            <div id="mobile-nav" data-prevent-default="true" data-mouse-events="true">
+                <div class="mobail_nav_overlay"></div>
+                <div class="mobile-nav-box">
+                    <div class="mobile-logo">
+                        <a href="#" class="mobile-main-logo">
+                            <img src="/images/header/home2 (1).png" width="182" height="40" alt="bar_png"><span>TicketPlanet</span>
+                        </a>
+                        <a href="#" class="manu-close"><i class="fa fa-times"></i></a>
+                    </div>
+                    <ul class="mobile-list-nav">
+                        <li>
+                            <a href="@Url.Action("Index", "Home")">HOME</a>
+                        </li>
+                        <li>
+                            <a href="@Url.Action("Index", "Movies")">MOVIES</a>
+                        </li>
+                        <li>
+                            <a href="@Url.Action("Index", "Events")">EVENTS</a>
+                        </li>
+                        <li>
+                            <a href="@Url.Action("Flights", "Events")">FLIGHTS</a>
+                        </li>
+                        <li>
+                            <a href="@Url.Action("Contact", "Home")">CONTACT</a>
+                        </li>
+                    </ul>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Content Here -->
+    @RenderBody()
+    <!-- prs Newsletter Wrapper End -->
+    <!-- prs footer Wrapper Start -->
+    <div class="prs_footer_main_section_wrapper">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                    <div class="prs_footer_cont1_wrapper prs_footer_cont1_wrapper_1">
+                        <h2>SERVICES</h2>
+                        <ul>
+                            <li>
+                                <i class="fa fa-circle"></i> &nbsp;&nbsp;<a href="@Url.Action("Index", "Movies")">Movie Ticket</a>
+                            </li>
+                            <li>
+                                <i class="fa fa-circle"></i> &nbsp;&nbsp;<a href="@Url.Action("Index", "Events")">Event Ticket</a>
+                            </li>
+                            <li>
+                                <i class="fa fa-circle"></i> &nbsp;&nbsp;<a href="#">Flight Ticket</a>
+                            </li>
+                            <li>
+                                <i class="fa fa-circle"></i> &nbsp;&nbsp;<a href="#">Bus Ticket</a>
+                            </li>
+
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                    <div class="prs_footer_cont1_wrapper prs_footer_cont1_wrapper_2">
+                        <h2>QUICK LINKS</h2>
+                        <ul>
+                            <li>
+                                <i class="fa fa-circle"></i> &nbsp;&nbsp;<a href="@Url.Action("About", "Home")">About Us</a>
+                            </li>
+                            <li>
+                                <i class="fa fa-circle"></i> &nbsp;&nbsp;<a href="@Url.Action("TermsAndCondition", "Home")">Terms & Conditions</a>
+                            </li>
+                            <li>
+                                <i class="fa fa-circle"></i> &nbsp;&nbsp;<a href="@Url.Action("Privacy", "Home")">Privacy Policy</a>
+                            </li>
+                            
+                            <li>
+                                <i class="fa fa-circle"></i> &nbsp;&nbsp;<a href="#">Careers</a>
+                            </li>
+                            
+
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                    <div class="prs_footer_cont1_wrapper prs_footer_cont1_wrapper_3">
+                        <h2>CONTACT</h2>
+                        <ul>
+                            <li>
+                                <i class="fa fa-address-book-o"></i> &nbsp;&nbsp;<a href="#">10 Sule Abuka St, Opebi 100281, Ikeja, Lagos, Nigeria</a>
+                            </li>
+                            <li>
+                                <i class="fa fa-phone"></i> &nbsp;&nbsp;<a href="#">0907 011 1115</a>
+                            </li>
+
+
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                    <div class="prs_footer_cont1_wrapper prs_footer_cont1_wrapper_4">
+                        <h2>App available on</h2>
+                        <p>Download App and Get Free Movie Ticket !</p>
+                        <ul>
+                            <li>
+                                <a href="#">
+                                    <img src="~/images/content/f1.jpg" alt="footer_img">
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <img src="~/images/content/f2.jpg" alt="footer_img">
+                                </a>
+                            </li>
+                        </ul>
+                        @*<h5><span>$50</span> Payback on App Download</h5>*@
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="prs_bottom_footer_wrapper">
+        <a href="javascript:" id="return-to-top" style="text-align:center"><i class="flaticon-play-button" style="bottom:20px;"></i></a>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 col-md-6 col-sm-8 col-xs-12">
+                    <div class="prs_bottom_footer_cont_wrapper">
+                        <p>
+                            Copyright 2020 <a href="#">Ticket Planet</a> . All rights reserved - Powered By <a href="#">Aerglo Technologies</a>
+                        </p>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-4 col-xs-12">
+                    <div class="prs_footer_social_wrapper">
+                        <ul>
+                            <li>
+                                <a href="https://www.facebook.com/Ticketplanetng-186216985505832/?ref=br_rs"><i class="fa fa-facebook"></i></a>
+                            </li>
+                            <li>
+                                <a href="https://twitter.com/ticketplanet_ng"><i class="fa fa-twitter"></i></a>
+                            </li>
+                            <li>
+                                <a href="https://www.instagram.com/ticketplanet.ng"><i class="fa fa-instagram"></i></a>
+                            </li>
+
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    @*<div class="chatWeb">
+        
+    </div>*@
+    <a target="_blank" href="https://web.whatsapp.com/send?phone=2349070111115&text=" class="btn btn-default nofocus bounce1 chatWeb">
+        <div style="background-color: lightgreen; color: rgba(0, 0, 0, 0.6); font-size:12px;padding-right:5px;font-weight:bold">
+            <img src="~/images/content/imageswhatapp.png" class="" style="background-color: limegreen;" width="50" height="40" alt="WhatsApp-chat">
+        </div>
+    </a>
+    <div class="chatMobile">
+        <a id="mobileWhatsapp" target="_blank" href="https://api.whatsapp.com/send?phone=2349070111115&text=" class="btn btn-default nofocus bounce1">
+            <div style="background-color: lightgreen; color: rgba(0, 0, 0, 0.6); font-size:12px;padding-right:5px;font-weight:bold">
+                <img src="~/images/content/imageswhatapp.png" class="" style="background-color: limegreen;" width="50" height="40" alt="WhatsApp-chat">
+            </div>
+        </a>
+    </div>
+    <!-- prs footer Wrapper End -->
+    <!-- st login wrapper Start -->
+    
+    
+    <!-- st login wrapper End -->
+    <!--main js file start-->
+   
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>    
+    <script src="~/js/modernizr.js"></script>
+    <script src="~/js/bootstrap.js"></script>
+    <script src="~/js/owl.carousel.js"></script>
+    <script src="~/js/jquery.dlmenu.js"></script>
+    <script src="~/js/jquery.sticky.js"></script>
+    <script src="~/js/jquery.nice-select.min.js"></script>
+    <script src="~/js/jquery.magnific-popup.js"></script>
+    <script src="~/js/jquery.bxslider.min.js"></script>
+    <script src="~/js/venobox.min.js"></script>
+    <script src="~/js/smothscroll_part1.js"></script>
+    <script src="~/js/smothscroll_part2.js"></script>
+    <script src="~/js/slick.js"></script>
+    <script src="~/js/custom2.js"></script>
+    @*<script src="~/js/custom2.js"></script>*@
+    <!--main js file end-->
+    <script src="~/js/ticketplanetjs/movies.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
+    <script src="~/js/ticketplanetjs/aes.js"></script>
+
+
+    <script src="~/js/ticketplanetjs/SelectJs.js"></script>
+    <script src="~/js/ticketplanetjs/aes.js"></script>
+    <script src="~/js/ticketplanetjs/crypto.js"></script>
+
+    <script src="~/js/ticketplanetjs/aes.js"></script>
+    <script src="~/js/ticketplanetjs/alertify.min.js"></script>
+    <!---Movies and events Scripting and payment-->
+    
+    <script src="~/js/ticketplanetjs/promoScript.js"></script>
+    
+    
+
+    <script>
+        $(document).ready(function () {
+
+            $('#drpLocation').select2({
+
+            });
+            $("#drpCinemaCompany").select2({
+                templateResult: function (idioma) {
+                    //var $span = $("<span><img src='../images/Partners/favicon.ico' height:'15' width:'15';/> " + "Film House" + "</span>");
+                    //var $span = $("<span><img src='../images/Partners/favicon.ico'/> " + idioma.text + "</span>");
+                    var $span = $("<span><img src='../images/Partners/" + idioma.id + ".png'/> " + idioma.text + "</span>");
+
+                    return $span;
+                },
+                templateSelection: function (idioma) {
+                    var $span = $("<span><img src='../images/Partners/" + idioma.id + ".png'/> " + idioma.text + "</span>");
+                    //var $span = $("<span><img src='https://www.free-country-flags.com/countries/"+idioma.id+"/1/tiny/" + idioma.id + ".png'/> " + idioma.text + "</span>");
+                    return $span;
+                },
+                templateSelection: function (idioma) {
+                    var $span = $("<span><img src='../images/Partners/" + idioma.id + ".png'/> " + idioma.text + "</span>");
+                    //var $span = $("<span><img src='https://www.free-country-flags.com/countries/"+idioma.id+"/1/tiny/" + idioma.id + ".png'/> " + idioma.text + "</span>");
+                    return $span;
+                }
+            });
+        });
+    </script>
+
+    
+
+</body>
+
+</html>

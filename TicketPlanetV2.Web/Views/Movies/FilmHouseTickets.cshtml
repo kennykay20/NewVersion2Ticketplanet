@@ -1,0 +1,865 @@
+﻿@model TicketPlanetV2.BAL.GenericModel.ViewModel.GenericViewModel
+
+@{
+    ViewBag.Title = "FilmHouse Tickets";
+    
+}
+
+<script src="https://api.ravepay.co/flwv3-pug/getpaidx/api/flwpbf-inline.js"></script>
+
+<style>
+    .loaderbody {
+        width: 100%;
+        height: 200%;
+        left: 0px;
+        top: 30%;
+        position: absolute;
+        background-color: rgba(128, 128, 128, 0.2);
+        z-index: 2147453647;
+    }
+
+    .loader {
+        border: 8px solid #f3f3f3;
+        border-top: 8px solid #3498db;
+        border-right: 8px solid #3498db;
+        border-bottom: 8px thin #3498db;
+        border-radius: 50%;
+        width: 50px;
+        height: 50px;
+        animation: spin 1s linear infinite;
+        position: fixed;
+        top: 45%;
+        left: 50%;
+    }
+
+    @@keyframes spin {
+        0% {
+            transform: rotate(0deg);
+        }
+
+        100% {
+            transform: rotate(360deg);
+        }
+    }
+
+    .loaderbody p {
+        position: fixed;
+        top: 55%;
+        left: 45%;
+        text-align: center;
+        color: #f3f3f3;
+    }
+
+    #loading {
+        width: 100%;
+        height: 100%;
+        top: 0px;
+        left: 0px;
+        position: fixed;
+        display: none;
+        opacity: .9;
+        background-color: #fff;
+        z-index: 99;
+        text-align: center;
+    }
+
+    #loading-image {
+        position: absolute;
+        top: 250px;
+        left: 550px;
+        z-index: 600;
+    }
+
+    button:hover {
+        border-color: #2196F3;
+    }
+</style>
+
+<style>
+    .prs_title_main_sec_wrapper1 {
+        background-repeat: no-repeat;
+        background-position: center 0;
+        background-size: cover;
+        width: 100%;
+        height: 100%;
+        float: left;
+        position: relative;
+        padding-top: 75px;
+        text-align: center;
+    }
+
+    @@media only screen and (max-width:420px) {
+        #paystackDIV, #flutterDIV {
+            margin-bottom: 30px;
+            text-align: center;
+        }
+    }
+
+    @@media only screen and (max-width:800px) {
+        #paystackDIV, #flutterDIV {
+            margin-bottom: 60px;
+            text-align: center;
+        }
+    }
+
+    @@media only screen and (min-width:800px) {
+        #paystackDIV, #flutterDIV {
+            margin-bottom: 60px;
+            text-align: center;
+        }
+    }
+
+    @@media only screen and (max-width:375px) {
+        #paymentModalContent {
+            margin-top: 10px;
+            text-align: center;
+        }
+    }
+
+    /*@@media only screen and (min-width:320px) {
+        #paymentModalContent {
+            margin-top: 10px;
+            text-align: center
+        }
+    }*/
+
+    @@media only screen and (max-width:1100px) {
+        #paystackDIV, #flutterDIV {
+            margin-bottom: 60px;
+            text-align: center;
+        }
+    }
+
+    @@media only screen and (min-width:1100px) {
+        #paystackDIV, #flutterDIV {
+            margin-bottom: 60px;
+            text-align: center;
+        }
+    }
+</style>
+
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
+
+
+
+<div class="prs_title_main_sec_wrapper1" style="background:url('../images/content/about/banner.jpg') 50% 0 repeat-y;">
+    <div class="prs_title_img_overlay1" style="background:rgba(0,0,0,0.8)"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="prs_title_heading_wrapper1" style="height:70px;">
+                    @*<h2>Image (movie booking)</h2>*@
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div id="MovieTicket" class="padding-tb-40px" style="background-color: transparent; background-repeat:no-repeat">
+    
+    <div class="container">
+        
+        <a href="@Url.Action("Index", "Movies")" class="text-blue" style="color:black;margin-top:24px;"><i class="fa fa-arrow-left"></i><b> Back</b></a>
+        <br/>
+        <br/>
+        <div class="row justify-content-center">
+
+            <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
+
+
+                <div class="background-white border border-grey-1 padding-30px margin-tb-30px">
+                    <div class="prs_contact_left_wrapper">
+                        <h2>MOVIE BOOKING </h2>
+                    </div>
+                    <div class="padding-top-10px">
+
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label for="inputName">Movie Name <span style="color:red">*</span></label>
+                                <input type="text" id="MovieName" readonly="readonly" value="@Model.MovieName" class="form-control">
+                                <input type="hidden" id="FilmCode" name="FilmCode" />
+                            </div>
+                            <div class="form-group col-md-6">
+
+                                <label for="inputEmail4">Cinema Name <span style="color:red">*</span> </label>
+                                <input type="text" id="CinemaName" readonly="readonly" value="@Model.CinemaName" class="form-control">
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label for="inputName">Full Name <span style="color:red">*</span></label>
+                                <input type="text" id="Fullname" class="form-control">
+                            </div>
+
+                            <div class="form-group col-md-6">
+                                <label for="inputEmail4">Phone No <span style="color:red">*</span> </label>
+                                <input type="text" id="phoneNo" class="form-control">
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label for="inputName">Email <span style="color:red">*</span> </label>
+                                <input type="email" id="email" class="form-control">
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="inputEmail4">No of Person(s) <span style="color:red">*</span> </label>
+                                @Html.DropDownListFor(model => model.MovieCategory, new List<SelectListItem>
+                                                {
+
+                                                    new SelectListItem{ Text="1 Person", Value = "1" },
+                                                    new SelectListItem{ Text="2 Person(s) ", Value = "2" },
+                                                    new SelectListItem{ Text="3 Person(s) ", Value = "3" },
+                                                     new SelectListItem{ Text="4 Person(s) ", Value = "4" },
+                                                      new SelectListItem{ Text="5 Person(s) ", Value = "5" },
+                                                       new SelectListItem{ Text="6 Person(s) ", Value = "6" },
+                                                       new SelectListItem{ Text="7 Person(s) ", Value = "7" },
+                                                 }, new { @class = "form-control", id = "NoOfPersons" })
+
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label for="inputName">Movie Date <span style="color:red">*</span></label>
+
+                                @Html.DropDownListFor(model => model.MovieDay,
+                                                              new SelectList(Model.drpMovieDay, "Value", "Text"), "--Select Date--", new { @class = "form-control", id = "MovieDate", data_required = "true" })
+
+                            </div>
+
+                            <div class="form-group col-md-6">
+                                <label for="inputEmail4">Movie Time <span style="color:red">*</span> </label>
+                                <select id="MovieTime" required="required" name="MovieTime" class="form-control"></select>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+
+                            <div class="form-group col-md-6">
+                                <label for="inputEmail4">Movie Category <span style="color:red">*</span> </label>
+
+                                @Html.DropDownListFor(model => model.MovieCategory,
+                                                              new SelectList(Model.drpMovieCategory, "Value", "Text"), "--Select Category--", new { @class = "form-control", id = "MovieCategory", data_required = "true" })
+
+                            </div>
+
+                            <div class="form-group col-md-6">
+                                <label for="inputName">Amount <span style="color:red">*</span> </label>
+                                <input type="text" id="MoviePrice" readonly="readonly" class="form-control">
+                            </div>
+                        </div>
+
+                        
+                        @*<div class="body-title">
+                            <div class="row" style="display:none;" id="selectTransaction">
+                                <div class="col-lg-10 col-xs-10">
+                                    <h6><b>Select payment method</b></h6>
+                                </div>
+                                <div class="row">
+                                    <div class="payment-option left-padd">
+                                        <div class="col-xs-12 col-lg-12 col-md-12">
+                                            <div class="prompt-section">
+                                                &nbsp;
+                                                <i class="fa fa-info-circle" aria-hidden="true"></i><span class=""> In using this option, please complete transaction within 10 minutes to avoid a timeout.</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>*@
+                        <p></p>
+                        <br/>
+
+                        <div class="row">
+
+
+                        </div>
+
+                        
+
+                        <div id="txtTextDisplay">
+                            <i class="fa fa-info-circle"></i> click on add to order
+                        </div><br />
+                        <div>
+                            <a href="javascript:void(0)" class="btn btn-primary btn-lg btnAddToOrders"  style="border-radius:5px;" > Add to Order <i class="fa fa-circle-o-notch fa-spin spinner" style="display:none"></i></a>
+                            @*<i class="fa fa-circle-o-notch fa-spin" id="spinner" style="display:none"></i>*@
+                        </div>
+
+                        <div>
+                            <a href="javascript:void(0)" data-toggle="modal" data-target="" class="btn btn-primary btn-lg" id="proceedBtn" style="border-radius:5px;display:none;">Proceed </a>
+                        </div>
+                        
+                        <br />
+                        <br />
+
+                        <input type="hidden" id="showtimeId" />
+                        <input type="hidden" value="@Model.SiteId" id="siteId" />
+                        <input type="hidden" value="@Model.filmId" id="filmId" />
+                        <input type="hidden" id="OrderId" />
+
+                        <p></p>
+                        <p></p>
+                        <p></p>
+
+
+                    </div>
+                    <!-- form -->
+
+
+                </div>
+                <!-- // col-lg-8 -->
+
+            </div>
+
+            <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+
+
+                <div class="container">
+
+                    @if (!string.IsNullOrEmpty(Model.MovieYouTube))
+                    {
+                        <p><b>Watch the Thriller</b></p>
+                        <iframe width="300" height="450" src="@Model.MovieYouTube" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    }
+                    else
+                    {
+                        <p>
+                            <span class="badge badge-danger">No Trailer Available for this Movie</span>
+                        </p>
+                    }
+                    <p><b>Synopsis</b></p>
+                    @if (!string.IsNullOrEmpty(Model.MovieSynopsis))
+                    {
+
+                        <p style="width:300px">
+                            <i>@Model.MovieSynopsis</i>
+                        </p>
+                    }
+                    else
+                    {
+                        <p>
+                            <span class="badge badge-danger">No Synopsis Available for this Movie</span>
+                        </p>
+                    }
+
+                </div>
+
+            </div>
+            <!-- // row -->
+        </div>
+        <!-- // container -->
+    </div>
+</div>
+
+
+
+    <div class="modal fade" id="paymentModal1" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-lg" role="document" >
+
+            <div class="modal-content" id="paymentModalContent" style="margin-top:200px;margin-bottom:50px; background-color:lightblue">
+                <button type="button" class="close" data-dismiss="modal" style="color:black;">close</button>
+                <br />
+                <div class="row">
+                    <div class="col-lg-12 col-xs-12 col-md-12 col-sm-12 text-center">
+                        <h3><b>Select payment method</b></h3>
+                        <p><i class="fa fa-info-circle" aria-hidden="true"></i><span class=""> In using this option, please complete transaction within 10 minutes to avoid timeout.</span></p>
+                    </div>
+                </div>
+                <div class="row text-center" style="margin-top:20px;">
+                    <div class="col-md-12 col-lg-12 col-xs-12 col-sm-12" id="flutterDIV">
+                        <a href="javascript:void(0)" class="w3-btn w3-round-xlarge w3-border-pink InitializeFlwPayment" style="border:2px solid black;border-radius:5px;" id="InitializeFlwPayment"><img src="~/assets/fltImage.jpg" style="width:250px;border-radius:5px;" height="100" alt="Alternate Text" /></a>
+                    </div>
+
+                    @*<div class="col-md-6 col-lg-6 col-xs-12 col-sm-12" id="paystackDIV">
+                        <a href="javascript:void(0)" class="w3-btn w3-round-xlarge w3-border-pink InitializePaystackPaymentFm" style="border:2px solid black;border-radius:5px;" id="InitializePaystackPaymentFm"><img src="~/assets/pt.png" style="width:250px;" height="100" alt="Alternate Text" /></a>
+                    </div>*@
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="loaderbody" id="loaderbody" style="display:none;">
+        <div class="loader"></div>
+        <p style="text-align:center; color:blue;"><b>.......loading please.......</b></p>
+    </div>
+
+
+<script src="~/js/jquery_min.js"></script>
+
+<script>
+    $(document).ready(function () {
+
+        
+    });
+</script>
+
+<script>
+    $(".btnAddToOrders").click(function () {
+        
+
+        var MovieDate = $("#MovieDate").val();
+        var MovieTime = $("#MovieTime").val();
+        var MovieCategory = $("#MovieCategory").val();
+        var MoviePrice = $("#MoviePrice").val();
+        var NoOfPersons = $("#NoOfPersons").val();
+        var showtimeId = $("#showtimeId").val();
+
+
+        if (MovieDate == null || MovieDate === "")
+        {
+            alertify.error("Movie Date is Required");
+            return;
+        }
+        if (MovieTime == null || MovieTime === "")
+        {
+            alertify.error("Movie Time is Required");
+            return;
+
+        }
+        if (MovieCategory == null || MovieCategory === "")
+        {
+            alertify.error("Movie Category is Required");
+            return;
+
+        }
+        if (MoviePrice == null || MoviePrice === "") {
+            alertify.error("Movie Price is Required");
+            return;
+        }
+
+        if (NoOfPersons == null || NoOfPersons === "") {
+            alertify.error("No Of Persons is Required");
+            return;
+        }
+
+        
+
+        $(".spinner").show();
+        $('.btnAddToOrders').prop('disabled', true);
+
+        $.ajax({
+            url: "@Url.Action("AddToOrder", "Movies")",
+            data: { MovieCategory: MovieCategory, MovieTime: MovieTime, NoOfPersons: NoOfPersons },
+            dataType: "json",
+            type: "POST",
+            processData: true,
+            success: function (data) {
+                $(".spinner").hide();
+                //console.log(data);
+                //alert(data);
+                if (data != 0) {
+
+                    //$('#btnSaveTrans').prop('disabled', false);
+                    $("#OrderId").val(data);
+                    $('#proceedBtn').show();
+                    $('#proceedBtn').attr('data-target', '#paymentModal1');
+                    //$(this).prop('disabled', true);
+                    //$('#proceedBtn').show();
+                    //alert(data);
+                    //$("#IntializePaymentFm").show();
+                    //$("#btnSaveTrans").hide();
+                    //$("#btnGatewayPayment").show();
+                    $(".btnAddToOrders").hide();
+                    $("#txtTextDisplay").hide();
+                    //$("#selectTransaction").show();
+                }
+                else if (data == 0) {
+                    //console.log(data);
+                    //alert(data);
+                    $('#btnSaveTrans').prop('disabled', false);
+                    $("#btnSaveTrans").show();
+                    $("#btnGatewayPayment").hide();
+                    $("#txtTextDisplay").show();
+                    $("#selectTransaction").hide();
+                    $("#spinner").hide();
+                    alert('The requested Booking was not found for This showtime Please select another Ticket Category Or Try again later!');
+                    alertify.error("The requested Booking was not found for This showtime Please select another Ticket Category Or Try again later!");
+                }
+
+            }, error: function (data) {
+                $('#btnSaveTrans').prop('disabled', false);
+                $("#btnSaveTrans").show();
+                $("#btnGatewayPayment").hide();
+                $("#txtTextDisplay").show();
+                $("#selectTransaction").hide();
+                $("#spinner").hide();
+                alert('The requested Booking was not found for This showtime Please select another Ticket Category Or Try again later!');
+            }
+
+        });
+    });
+</script>
+
+<script>
+    $(function () {
+
+
+
+        function InitFlwTransaction(data) {
+                return $.ajax({
+                    type: "POST",
+                    url: "@Url.Action("FlutterwaveMoviePaymentFM", "Movies", new { area = "" })",
+                    data: data,
+                    dataType: 'json',
+                contentType: 'application/json;charset=utf-8'
+            });
+        }
+
+        $("#InitializeFlwPayment").click(function (e) {
+
+
+            if ($("#Fullname").val() === "" || $('#phoneNo').val() === "" ||
+                    $('#email').val() === "" ||
+                    $('#NoOfPersons').val() === "" ||
+                    $('#MovieCategory').val() === "" ||
+                    $('#Amount').val() === "" || $('#MovieDay').val() === "" || $('#MovieTime').val() === "" || $('#currency').val() === "") {
+
+                alertify.error("One or Two Compulsory Fields is Empty");
+                return;
+            }
+
+            $("#loaderbody").show();
+            e.preventDefault();
+
+
+            var data = JSON.stringify({
+                Fullname: $("#Fullname").val(),
+                phoneNo: $("#phoneNo").val(),
+                email: $("#email").val(),
+                NoOfPersons: $("#NoOfPersons").val(),
+                MovieCategory: $("#MovieCategory").val(),
+                MovieCategoryText: $("#MovieCategory option:selected").text(),
+                Amount: $("#MoviePrice").val(),
+                siteId: $("#siteId").val(),
+                showtimeId: $("#MovieTime").val(),
+                orderId: $("#OrderId").val(),
+                MovieDay: $("#MovieDate").val(),
+                MovieTime: $("#MovieTime option:selected").text(),
+                MovieName: $("#MovieName").val(),
+            });
+
+
+
+            $.when(InitFlwTransaction(data)).then(function (response) {
+
+
+                    if (response.error == false) {
+                        $('#loaderbody').hide();
+                        //console.log(response.result);
+                        //console.log(('#amtCharge').val());
+                        //console.log(totalAmounts);
+                        payWithRave(response.result.publicKey, response.result);
+                        //window.location.href = response.result.data.authorization_url;
+
+                    } else {
+                        $("#loaderbody").hide();
+                    }
+
+                }).fail(function () {
+                    $("#loaderbody").hide();
+                });
+
+            });
+
+    });
+
+    //const API_publicKey = "<ADD YOUR PUBLIC KEY HERE>";
+
+    function payWithRave(pbKeys, data) {
+        //var phone = $('#njj').val();
+
+        var txtRef = data.Reference;
+
+        var x = getpaidSetup({
+            PBFPubKey: pbKeys,
+            customer_email: data.email,
+            amount: data.amount,
+            customer_phone: data.phoneNo,
+            customer_fullName: data.firstname,
+            currency: "NGN",
+            country: "NG",
+            txref: data.Reference,
+            meta: [{
+                metaname: "TICKETPLANET LIMITED",
+                metavalue: "1133395"
+            }],
+            onclose: function () { },
+            callback: function (response) {
+                var fltRef = response.tx.txRef; // collect txRef returned and pass to a server page to complete status check.
+                //console.log("This is the response returned after a charge", response);
+                //console.log(fltRef);
+                //console.log(response);
+
+
+
+                if (response.tx.chargeResponseCode == "00")
+                {
+                    // redirect to a success page
+                    var flutterRef = response.tx.flwRef;
+                    var tkReference = response.tx.txRef;
+
+                    $.ajax({
+                        url: "@Url.Action("updateFlutterwave", "Movies")",
+                        data: { reference: response.tx.txRef, flwRef: response.tx.flwRef },
+                        dataType: 'json',
+                        type: "POST",
+                        success: function (data) {
+                            if (data.error == false) {
+                                //redirect to confirmation payment page
+                                alert("Payment Successful, please check your email for payment confirmation.");
+                                response.tx.redirectUrl = "http://localhost:2070/Movies/PaymentConfirmationFMflw?reference=" + response.tx.txRef + "&fltRef=" + response.tx.flwRef;
+                                //response.tx.redirectUrl = "https://www.ticketplanet.ng/Movies/PaymentConfirmationFMflw?reference=" + response.tx.txRef + "&fltRef=" + response.tx.flwRef;
+                                window.location.href = response.tx.redirectUrl;
+
+                            } else {
+
+                            }
+                        }
+                    });
+
+                    //window.location.href = "https://ticketplanet.ng/Movies/paymentConfirmationFlw?reference=" + tkReference + "&fltRef=" + flutterRef;
+                    //alert("Transaction Complete Successfully");
+                } else {
+                    // redirect to a failure page.
+
+                }
+
+                x.close(); // use this to close the modal immediately after payment.
+            }
+        });
+    }
+    </script>
+
+<script>
+
+    $(function () {
+        function InitTransaction(data)
+        {
+                return $.ajax({
+                    type: "POST",
+                    url: "@Url.Action("InitializeMoviePaymentFM", "Movies", new { area = "" })",
+                    data: data,
+                    dataType: 'json',
+                    contentType: 'application/json;charset=utf-8'
+                });
+        }
+
+        $("#InitializePaystackPaymentFm").click(function (e) {
+
+
+            if ($("#Fullname").val() === "" || $('#phoneNo').val() === "" ||
+                     $('#email').val() === "" ||
+                     $('#NoOfPersons').val() === "" ||
+                     $('#MovieCategory').val() === "" ||
+                     $('#Amount').val() === "" || $('#MovieDay').val() === "" || $('#MovieTime').val() === "")
+            {
+
+                alertify.error("One or Two Compulsory Fields is Empty");
+                return;
+            }
+
+            $("#loaderbody").show();
+            e.preventDefault();
+
+
+            var data = JSON.stringify({
+                Fullname: $("#Fullname").val(),
+                phoneNo: $("#phoneNo").val(),
+                email: $("#email").val(),
+                NoOfPersons: $("#NoOfPersons").val(),
+                MovieCategory: $("#MovieCategory").val(),
+                MovieCategoryText: $("#MovieCategory option:selected").text(),
+                Amount: $("#MoviePrice").val(),
+                siteId: $("#siteId").val(),
+                showtimeId: $("#MovieTime").val(),
+                orderId: $("#OrderId").val(),
+                MovieDay: $("#MovieDate").val(),
+                MovieTime: $("#MovieTime option:selected").text(),
+                MovieName: $("#MovieName").val(),
+            });
+
+
+
+            $.when(InitTransaction(data)).then(function (response) {
+
+
+                if (response.error == false) {
+                    $("#loaderbody").hide();
+                    window.location.href = response.result.data.authorization_url;
+                } else {
+                    $("#loaderbody").hide();
+                }
+
+            }).fail(function () {
+                $("#loaderbody").hide()
+            });
+
+        });
+
+    });
+</script>
+    
+<script>
+    $("#MovieTime").on('change', function () {
+        //$('#btnSaveTrans').prop('disabled', false);
+        //$("#btnSaveTrans").show();
+        //$("#btnGatewayPayment").hide();
+        $("#txtTextDisplay").show();
+        $("#selectTransaction").hide();
+        $("#spinner").hide();
+    });
+
+    $("#MovieDate").on('change', function () {
+        $('#loaderbody').show();
+        $('#MovieTime').prop('disabled', false);
+        $('#MovieTime option:eq(0)').attr('selected', 'selected')
+
+        var siteId = $("#siteId").val();
+        var MovieDay = $("#MovieDate").val();
+        var filmId = $("#filmId").val();
+        var movieDate = $("#MovieDate option:selected").text();
+
+        $('.btnAddToOrders').prop('disabled', false);
+        $(".btnAddToOrders").show();
+        
+        $("#proceedBtn").hide();
+        $("#spinner").hide();
+
+        $.ajax({
+            url: "@Url.Action("GetFilmHouseMovieTime", "Movies")",
+            data: { MovieDay: MovieDay, siteId: siteId, filmId: filmId },
+        dataType: "json",
+        type: "POST",
+
+        success: function (data) {
+            // alert("hhh")
+            $("#MovieTime").html("");
+            $("#MovieTime").append($('<option></option>').val(null).html("Movie Time"));
+            //console.log(data);
+            if (data.length < 0 || data.length == 0) {
+                alert("No Movie time available for " + movieDate + ", Please select another day!");
+                alertify.error("No Movie time available for" + movieDate + ", Please select another day");
+                $('#loaderbody').hide();
+                return;
+            }
+            //console.log(data)
+            $.each(data, function (item, lct)
+            {
+
+                $("#MovieTime").append($('<option></option>').val(lct.showtimeId).html(lct.startTime))
+            })
+
+            $('#loaderbody').hide();
+            $("#Amount").html("");
+
+        }
+    });
+
+
+});
+
+
+
+
+    $("#NoOfPersons").on('change', function () {
+        $("#loaderbody").show();
+        var price = $("#MovieCategory").val();
+        var NoOfPersons = $("#NoOfPersons").val();
+        if (price == null || price === "")
+        {
+            alertify.error("Kindly Select a Movie Category");
+            $("#loaderbody").hide();
+            return;
+
+        }
+        $('.btnAddToOrders').prop('disabled', false);
+        $(".btnAddToOrders").show();
+
+        $("#proceedBtn").hide();
+
+        $.ajax({
+            url: "@Url.Action("GetFilmHousePrice", "Movies")",
+            data: { price: price, NoOfPersons: NoOfPersons },
+        dataType: "json",
+        type: "POST",
+
+        success: function (data)
+        {
+            // alert(data)
+            $('#MoviePrice').attr('disabled', false);
+            if (data != null)
+            {
+                $("#MoviePrice").val(data);
+                $('#loaderbody').hide();
+                $('#MoviePrice').attr('disabled', false);
+
+            }
+            else if(data.OrigAmount != null)
+            {
+                $('#loaderbody').hide();
+                $('#MoviePrice').attr('disabled', true);
+            }
+
+
+        }
+    });
+    });
+
+
+
+    $("#MovieCategory").on('change', function () {
+        $('#loaderbody').show();
+        var price = $("#MovieCategory").val();
+        var NoOfPersons = $("#NoOfPersons").val();
+        if (NoOfPersons == null || NoOfPersons === "")
+        {
+            alertify.error("Kindly Select at Least One Person(s)");
+            $('#loaderbody').hide();
+            return;
+
+        }
+        if (price == null || price === "") {
+            $('#loaderbody').hide();
+            alertify.error("Kindly Select Movie Category");
+        }
+
+        $('.btnAddToOrders').prop('disabled', false);
+        $(".btnAddToOrders").show();
+
+        $("#proceedBtn").hide();
+
+        $.ajax({
+            url: "@Url.Action("GetFilmHousePrice", "Movies")",
+            data: { price: price, NoOfPersons: NoOfPersons },
+        dataType: "json",
+        type: "POST",
+
+        success: function (data)
+        {
+            // alert(data)
+            $('#MoviePrice').attr('disabled', false);
+            if (data != null)
+            {
+                $('#MoviePrice').attr('disabled', false);
+                $("#MoviePrice").val(data);
+                $('#loaderbody').hide();
+            }
+            else if(data.OrigAmount != null)
+            {
+                $('#MoviePrice').attr('disabled', true);
+                $('#loaderbody').hide();
+            }
+
+
+        }
+    });
+
+
+    });
+</script>

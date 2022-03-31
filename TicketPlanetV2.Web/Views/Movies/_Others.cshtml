@@ -1,0 +1,47 @@
+﻿@model TicketPlanetV2.BAL.GenericModel.ViewModel.GenericViewModel
+@Html.HiddenFor(o => o.CinemaID, new { name = "CinemaId", id = "CinemaId" })
+@if (Model.MovieList != null)
+{
+    foreach (var i in Model.MovieList)
+    {
+        if (!string.IsNullOrWhiteSpace(i.Img_1s))
+        {
+            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6 prs_upcom_slide_first">
+                <div class="prs_upcom_movie_box_wrapper">
+                    <div class="prs_upcom_movie_img_box">
+                        <img src="@i.Img_1s" width="400" height="380" />
+
+                        <div class="prs_upcom_movie_img_overlay"></div>
+                        <div class="prs_upcom_movie_img_btn_wrapper">
+                            <ul>
+                                <li>
+                                    <a href="#">View Trailer</a>
+                                </li>
+                                <li>
+                                    <a href="#">Buy Ticket</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="prs_upcom_movie_content_box">
+                        <div class="prs_upcom_movie_content_box_inner">
+                            <b style="color:black">@i._FilmTitle</b>
+                            <p> @i.ComingSoon</p>	@*<i class="fa fa-star"></i>*@
+                            @*<i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star-o"></i>
+                                <i class="fa fa-star-o"></i>*@
+                        </div>
+                        @*<div class="prs_upcom_movie_content_box_inner_icon">
+                                <ul>
+                                    <li>
+                                        <a href="movie_booking.html"><i class="flaticon-cart-of-ecommerce"></i></a>
+                                    </li>
+                                </ul>
+                            </div>*@
+                    </div>
+                </div>
+            </div>
+        }
+    }
+}

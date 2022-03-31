@@ -1,0 +1,580 @@
+﻿@model TicketPlanetV2.BAL.GenericModel.ViewModel.GenericViewModel
+
+<script src="https://api.ravepay.co/flwv3-pug/getpaidx/api/flwpbf-inline.js"></script>
+<style>
+    .loaderbody {
+        width: 100%;
+        height: 200%;
+        left: 0px;
+        top: 30%;
+        position: absolute;
+        background-color: rgba(128, 128, 128, 0.2);
+        z-index: 2147453647;
+    }
+
+    .loader {
+        border: 8px solid #f3f3f3;
+        border-top: 8px solid #3498db;
+        border-right: 8px solid #3498db;
+        border-bottom: 8px thin #3498db;
+        border-radius: 50%;
+        width: 50px;
+        height: 50px;
+        animation: spin 1s linear infinite;
+        position: fixed;
+        top: 45%;
+        left: 50%;
+    }
+
+    @@keyframes spin {
+        0% {
+            transform: rotate(0deg);
+        }
+
+        100% {
+            transform: rotate(360deg);
+        }
+    }
+
+    .loaderbody p {
+        position: fixed;
+        top: 55%;
+        left: 45%;
+        text-align: center;
+        color: #f3f3f3;
+    }
+
+    #loading {
+        width: 100%;
+        height: 100%;
+        top: 0px;
+        left: 0px;
+        position: fixed;
+        display: none;
+        opacity: .9;
+        background-color: #fff;
+        z-index: 99;
+        text-align: center;
+    }
+
+    #loading-image {
+        position: absolute;
+        top: 250px;
+        left: 550px;
+        z-index: 600;
+    }
+
+    button:hover {
+        border-color: #2196F3;
+    }
+</style>
+
+<style>
+    .prs_title_main_sec_wrapper1 {
+        background-repeat: no-repeat;
+        background-position: center 0;
+        background-size: cover;
+        width: 100%;
+        height: 100%;
+        float: left;
+        position: relative;
+        padding-top: 75px;
+        text-align: center;
+    }
+</style>
+<style>
+    /*@@media only screen and (max-width:360px) {
+        #paystackDIV, #flutterDIV {
+            margin-bottom: 60px;
+            text-align: center
+        }
+    }*/
+
+    @@media only screen and (max-width:420px) {
+        #paystackDIV, #flutterDIV {
+            margin-bottom: 30px;
+            text-align: center;
+        }
+    }
+
+    @@media only screen and (max-width:800px) {
+        #paystackDIV, #flutterDIV {
+            margin-bottom: 60px;
+            text-align: center;
+        }
+    }
+
+    @@media only screen and (min-width:800px) {
+        #paystackDIV, #flutterDIV {
+            margin-bottom: 60px;
+            text-align: center;
+        }
+    }
+
+    @@media only screen and (max-width:375px) {
+        #paymentModalContent {
+            margin-top: 10px;
+            text-align: center;
+        }
+    }
+
+    /*@@media only screen and (min-width:320px) {
+        #paymentModalContent {
+            margin-top: 10px;
+            text-align: center
+        }
+    }*/
+
+    @@media only screen and (max-width:1100px) {
+        #paystackDIV, #flutterDIV {
+            margin-bottom: 60px;
+            text-align: center;
+        }
+    }
+
+    @@media only screen and (min-width:1100px) {
+        #paystackDIV, #flutterDIV {
+            margin-bottom: 60px;
+            text-align: center;
+        }
+    }
+</style>
+
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<div id="loading">
+    <div class="looding-in background-light-grey padding-tb-200px z-index-99">
+        <div class="container">
+            <div class="row justify-content-md-center">
+                <div class="col-lg-6 text-center">
+                    <!-- Loading -->
+                    <div class="loading-page">
+                        <div class="counter">
+                            <div class="text-center"><a href="#"><img src="~/images/tk_paymentLogo2.png" alt=""></a></div>
+                            <div class="margin-tb-30px padding-8px background-white">
+                                <div class="animation padding-2px background-main-color"></div>
+                            </div>
+                            <p>Please wait..</p>
+                            <p>You are been redirected to a secure payment system</p>
+                            <div>loading <span class="num">0%</span></div>
+                        </div>
+                    </div>
+
+                    <!-- // Loading -->
+                </div>
+            </div>
+            <!-- // row -->
+        </div>
+        <!-- // container -->
+    </div>
+</div>
+
+
+<div id="loadVoucherCode" style="display:none">
+    <div class="looding-in background-light-grey padding-tb-200px z-index-99">
+        <div class="container">
+            <div class="row justify-content-md-center">
+                <div class="col-lg-6 text-center">
+                    <!-- Loading -->
+                    <div class="loading-page">
+                        <div class="counter">
+                            <div class="text-center"><a href="#"><img src="~/images/lo1.png" alt=""></a></div>
+                            <div class="margin-tb-30px padding-8px background-white">
+                                <div class="animation padding-2px background-main-color"></div>
+                            </div>
+                            <p>Please wait..</p>
+                            <p>Verifying Voucher Code</p>
+                            <div>loading <span class="num">0%</span></div>
+                        </div>
+                    </div>
+                    <!-- // Loading -->
+                </div>
+            </div>
+            <!-- // row -->
+        </div>
+        <!-- // container -->
+    </div>
+</div>
+
+
+
+
+
+
+@if (Model.Img_Banner == null || Model.Img_Banner == "none")
+{
+    <div class="prs_title_main_sec_wrapper1" style="background:url('../images/content/aboust/banner.jpg') 50% 0 repeat-y;">
+        <div class="prs_title_img_overlay1" style="background:rgba(0,0,0,0.8)"></div>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="prs_title_heading_wrapper1" style="height:70px;">
+                        @*<h2>Image (movie booking)</h2>*@
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+else
+{
+    <div class="prs_title_main_sec_wrapper1" style="background:url('@Model.Img_Banner');">
+        <div class="prs_title_img_overlay1"></div>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="prs_title_heading_wrapper1" style="height:100px;">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+
+<div id="MovieTicket" class="padding-tb-40px" style="background-color: transparent; background-repeat:no-repeat">
+
+    <div class="container">
+
+        <a href="@Url.Action("Index", "Movies")" class="text-blue" style="color:black;margin-top:24px;"><i class="fa fa-arrow-left"></i><b> Back</b></a>
+        <br />
+        <br />
+        <div class="row justify-content-center">
+
+            <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
+
+
+                <div class="background-white border border-grey-1 padding-30px margin-tb-30px">
+                    <div class="prs_contact_left_wrapper">
+                        <h2>MOVIE BOOKING </h2>
+                    </div>
+                    <div class="padding-top-10px">
+
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label for="inputName">Movie Name <span style="color:red">*</span></label>
+                                <input type="text" id="MovieName" readonly="readonly" value="@Model.MovieName" class="form-control">
+                                <input type="hidden" id="FilmCode" name="FilmCode" />
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="inputEmail4">Cinema Name <span style="color:red">*</span> </label>
+                                @Html.DropDownListFor(model => model.CinemaID,
+                                                                   new SelectList(Model.drpMovieLocatn, "Value", "Text"), "--Select Cinema--", new { @class = "form-control", id = "CinemaCompanyID", data_required = "true" })
+
+
+                                @*<input type="text" id="CinemaLocation" readonly="readonly" value="@Model.CinemaName" class="form-control">*@
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label for="inputName">Full Name <span style="color:red">*</span></label>
+                                <input type="text" id="Fullname" class="form-control">
+                            </div>
+
+                            <div class="form-group col-md-6">
+                                <label for="inputEmail4">Phone No <span style="color:red">*</span> </label>
+                                <input type="text" id="phoneNo" class="form-control">
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label for="inputName">Email <span style="color:red">*</span> </label>
+                                <input type="email" id="email" class="form-control">
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="inputEmail4">No of Person(s) <span style="color:red">*</span> </label>
+                                @Html.DropDownListFor(model => model.MovieCategory, new List<SelectListItem>
+                                            {
+
+                                                new SelectListItem{ Text="1 Person", Value = "1" },
+                                                new SelectListItem{ Text="2 Person(s) ", Value = "2" },
+                                                new SelectListItem{ Text="3 Person(s) ", Value = "3" },
+                                                 new SelectListItem{ Text="4 Person(s) ", Value = "4" },
+                                                  new SelectListItem{ Text="5 Person(s) ", Value = "5" },
+                                                   new SelectListItem{ Text="6 Person(s) ", Value = "6" },
+                                                   new SelectListItem{ Text="7 Person(s) ", Value = "7" },
+                                             }, new { @class = "form-control", id = "NoOfPersons" })
+
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label for="inputName">Movie Day <span style="color:red">*</span> </label>
+                                <select id="MovieDay" required="required" name="MovieDay" class="form-control"></select>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="inputEmail4">Movie Time <span style="color:red">*</span> </label>
+                                <select id="MovieTime" required="required" name="MovieTime" class="form-control"></select>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label for="inputName">Movie Category <span style="color:red">*</span> </label>
+
+                                @Html.DropDownListFor(model => model.MovieDay,
+                                                          new SelectList(Model.drpMovieCategory, "Value", "Text"), "--Select Category--", new { @class = "form-control", id = "MovieCategory", data_required = "true" })
+
+
+                            </div>
+                            <div class="form-group col-md-6" id="amtDiv">
+                                <label for="inputEmail4">Amount <span style="color:red">*</span> </label>
+                                <input type="text" id="Amount" readonly="readonly" class="form-control">
+                                <span id="lblCoupon" style="display:none" class="badge badge-warning">% Discount Applies</span>
+                                <strike id="OrigAmount" style="display:none" class="badge badge-warning">
+
+                                </strike>
+
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+
+                            </div>
+                            <div class="form-group col-md-6" id="amtChargeDiv" style="display:none;">
+                                <label for="inputEmail4">Charge+ </label>
+                                <input type="text" id="amtCharge" readonly="readonly" class="form-control">
+                            </div>
+                        </div>
+
+
+
+                        <p></p>
+                        <br />
+
+                        <div class="row">
+
+
+                        </div>
+
+                        <div>
+                            <a href="javascript:void(0)" data-toggle="modal" data-target="" class="btn btn-primary btn-lg" id="proceedBtn" style="border-radius:5px;">Proceed</a>
+                        </div>
+
+                        <br />
+                        <br />
+
+                        <button type="button" style="display:none" id="btnSaveTrans" class="btn btn-primary"> Process</button>
+
+                        <input type="hidden" id="CouponValue" />
+                        <input type="hidden" id="nErrorCode" />
+                        <input type="hidden" id="IsCoupon" />
+                        <input type="hidden" id="Coupon" />
+                        <input type="hidden" id="CouponAgentId" />
+                        <input type="hidden" id="CouponAssignId" />
+                        <input type="hidden" id="CouponID" />
+                        <input type="hidden" id="PromoCode" />
+                        <p></p>
+                        <p></p>
+                        <p></p>
+
+
+                    </div>
+                    <!-- form -->
+
+
+                </div>
+
+                <!-- // col-lg-8 -->
+
+            </div>
+
+            <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+
+                <div class="container">
+
+
+                    @if (!string.IsNullOrEmpty(Model.MovieYouTube))
+                    {
+                        <p><b>Watch the Thriller</b></p>
+                        <iframe width="300" height="450" src="@Model.MovieYouTube" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    }
+                    else
+                    {
+                        <p>
+                            <span class="badge badge-danger">No Trailer Available for this Movie</span>
+                        </p>
+                    }
+                    <p><b>Synopsis</b></p>
+                    @if (!string.IsNullOrEmpty(Model.MovieSynopsis))
+                    {
+
+                        <p style="width:300px">
+                            <i>@Model.MovieSynopsis</i>
+                        </p>
+                    }
+                    else
+                    {
+                        <p>
+                            <span class="badge badge-danger">No Synopsis Available for this Movie</span>
+                        </p>
+                    }
+
+
+                </div>
+
+
+
+            </div>
+            <!-- // row -->
+        </div>
+
+
+        <!-- // container -->
+    </div>
+</div>
+
+<br />
+<br />
+
+
+<div class="modal fade" id="paymentModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-lg" role="document">
+
+        <div class="modal-content" id="paymentModalContent" style="margin-top:200px;background-color:lightblue">
+            <button type="button" class="close" data-dismiss="modal" style="color:black;">close</button>
+            <br />
+            <div class="row">
+                <div class="col-lg-12 col-xs-12 col-md-12 col-sm-12 text-center">
+                    <h3><b>Select payment method</b></h3>
+                    <p><i class="fa fa-info-circle" aria-hidden="true"></i><span class=""> In using this option, please complete transaction within 10 minutes to avoid timeout.</span></p>
+                </div>
+            </div>
+            <div class="row text-center" style="margin-top:20px;">
+                <div class="col-md-12 col-lg-12 col-xs-12 col-sm-12" id="flutterDIV">
+                    <a href="javascript:void(0)" class="w3-btn w3-round-xlarge w3-border-pink IntializeFlwPayment" style="border:2px solid black;border-radius:5px;" id="IntializeFlwPayment"><img src="~/assets/fltImage.jpg" style="width:250px;border-radius:5px;" height="100" alt="Alternate Text" /></a>
+                </div>
+
+                @*<div class="col-md-6 col-lg-6 col-xs-12 col-sm-12" id="paystackDIV">
+                        <a href="javascript:void(0)" class="w3-btn w3-round-xlarge w3-border-pink IntializePayment" style="border:2px solid black;border-radius:5px;" id="IntializePayment"><img src="~/assets/pt.png" style="width:250px;" height="100" alt="Alternate Text" /></a>
+                    </div>*@
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div class="loaderbody" id="loaderbody" style="display:none;">
+    <div class="loader"></div>
+    <p style="text-align:center; color:blue;"><b>.......loading please.......</b></p>
+</div>
+<script src="~/js/jquery.js"></script>
+<script src="~/js/ticketplanetjs/ScriptingMovies.js"></script>
+@*<script src="~/js/ticketplanetjs/moviesPaystackInitialize.js"></script>*@
+<script src="~/js/ticketplanetjs/movieFlutterInitialize.js"></script>
+@*<script src="~/js/ticketplanetjs/flutterWavePercent.js"></script>*@
+<script>
+    $(document).ready(function () {
+
+        $("#proceedBtn").click(function () {
+            if ($("#Fullname").val() === "" || $('#phoneNo').val() === "" ||
+                 $('#email').val() === "" ||
+                 $('#NoOfPersons').val() === "" ||
+                 $('#MovieCategory').val() === "" ||
+                 $('#Amount').val() === "" || $('#MovieDay').val() === "" || $('#MovieTime').val() === "") {
+
+                $(this).attr("data-target", "");
+                alertify.error("One or Two Compulsory Fields is Empty");
+                return;
+            } else {
+                //console.log("kenny");
+                $(this).attr("data-target", "#paymentModal");
+                //alert($(this).data('target'));
+            }
+        });
+    });
+</script>
+
+<script>
+    $(function () {
+
+
+
+        function InitTransaction(data) {
+            return $.ajax({
+                type: "POST",
+                url: "/Movies/InitializeMoviePayment",
+                data: data,
+                dataType: 'json',
+                contentType: 'application/json;charset=utf-8'
+            });
+        }
+
+        $("#IntializePayment").click(function (e) {
+
+
+            //if ($("#Fullname").val() === "" || $('#phoneNo').val() === "" ||
+            //         $('#email').val() === "" ||
+            //         $('#NoOfPersons').val() === "" ||
+            //         $('#MovieCategory').val() === "" ||
+            //         $('#Amount').val() === "" || $('#MovieDay').val() === "" || $('#MovieTime').val() === "") {
+
+            //    alertify.error("One or Two Compulsory Fields is Empty");
+            //    return;
+            //}
+
+            //$("#preloader").show();
+            $("#status").fadeIn();
+            $("#preloader").delay(350).fadeIn("slow");
+            e.preventDefault();
+
+            var data = JSON.stringify({
+                Fullname: $("#Fullname").val(),
+                phoneNo: $("#phoneNo").val(),
+                email: $("#email").val(),
+                NoOfPersons: $("#NoOfPersons").val(),
+                MovieCategory: $("#MovieCategory").val(),
+                Amount: $("#Amount").val(),
+                comments: $("#comments").val(),
+
+                CinemaLocation: $("#CinemaCompanyID").val(),
+                CinemaCompanyID: $("#CinemaCompanyID").val(),
+
+                MovieDay: $("#MovieDay").val(),
+                MovieTime: $("#MovieTime").val(),
+                MovieName: $("#MovieName").val(),
+
+                IsCoupon: $("#IsCoupon").val(),
+                Coupon: $("#Coupon").val(),
+                CouponAgentId: $("#CouponAgentId").val(),
+                CouponAssignId: $("#CouponAssignId").val(),
+                CouponID: $("#CouponID").val(),
+                nErrorCode: $("#nErrorCode").val(),
+                CouponValue: $("#CouponValue").val()
+            });
+
+
+
+            $.when(InitTransaction(data)).then(function (response) {
+
+
+                if (response.error == false) {
+                    $("#status").fadeOut();
+                    $("#preloader").delay(350).fadeOut("slow");
+                    console.log(response.result.data.authorization_url);
+                    window.location.href = response.result.data.authorization_url;
+
+                } else {
+                    $("#status").fadeOut();
+                    $("#preloader").delay(350).fadeOut("slow");
+                }
+
+            }).fail(function () {
+                $("#status").fadeOut();
+                $("#preloader").delay(350).fadeOut("slow");
+            });
+
+        });
+
+    });
+
+</script>
+
+
+
+

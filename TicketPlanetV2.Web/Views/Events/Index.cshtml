@@ -1,0 +1,278 @@
+﻿@model TicketPlanetV2.BAL.GenericModel.ViewModel.GenericViewModel
+    <style>
+        .btnSubmit 
+        {
+            display:inline-block;
+	        width:150px;
+	        height:50px;
+	        text-align:center;
+	        line-height:50px;
+	        border:1px solid #DF3E3D;
+	        /*margin-right:-900px;*/
+	        background:transparent;
+	        color:#ffffff;
+	        margin-top:10px;
+	            -webkit-border-radius: 10px;
+            -moz-border-radius: 10px;
+            border-radius: 10px;
+	        -webkit-transition: all 0.5s;
+            -o-transition: all 0.5s;
+            -ms-transition: all 0.5s;
+            -moz-transition: all 0.5s;
+            transition: all 0.5s;
+        }
+
+        .btnSubmit:hover
+        {
+          background:#DF3E3D;
+	        border:1px solid #DF3E3D;
+	        -webkit-transition: all 0.5s;
+            -o-transition: all 0.5s;
+            -ms-transition: all 0.5s;
+            -moz-transition: all 0.5s;
+            transition: all 0.5s;
+        }
+
+        .btnSubmit1 
+        {
+            display:inline-block;
+	        width:150px;
+	        height:50px;
+	        text-align:center;
+	        line-height:50px;
+	        border:1px solid #DF3E3D;
+	        /*margin-right:-900px;*/
+	        background:transparent;
+	        color:#DF3E3D;
+	        margin-top:10px;
+	            -webkit-border-radius: 10px;
+            -moz-border-radius: 10px;
+            border-radius: 10px;
+	        -webkit-transition: all 0.5s;
+            -o-transition: all 0.5s;
+            -ms-transition: all 0.5s;
+            -moz-transition: all 0.5s;
+            transition: all 0.5s;
+        }
+
+        .btnSubmit1:hover
+        {
+          background:#DF3E3D;
+	        border:1px solid #DF3E3D;
+            color:#fff;
+	        -webkit-transition: all 0.5s;
+            -o-transition: all 0.5s;
+            -ms-transition: all 0.5s;
+            -moz-transition: all 0.5s;
+            transition: all 0.5s;
+        }
+    </style>
+<style>
+    
+    @@media only screen and (min-width: 800px) {
+      .prs_ec_pe_heading_section_wrapper1 h2{
+           font-size:32px;
+           color:#fff;
+	        text-transform:uppercase;
+	        font-weight:bold;
+	        position:relative;
+
+      } 
+    }
+    @@media only screen and (max-width: 800px) {
+      .prs_ec_pe_heading_section_wrapper1 h2{
+           font-size:15px;
+           color:#fff;
+	        text-transform:uppercase;
+	        font-weight:bold;
+	        position:relative;
+            margin-top:0px;
+      } 
+    }
+
+    @@media only screen and (min-width: 800px) {
+        .prs_upcom_movie_content_box_inner h6{
+            font-size: 8px;
+        }
+    }
+    @@media only screen and (max-width: 800px) {
+        .prs_upcom_movie_content_box_inner h6{
+            font-size: 13px;
+        }
+    }
+</style>
+
+<!-- prs web series Slider End -->
+<!-- prs videos&photos slider Start --> 
+
+<div class="prs_vp_main_section_wrapper1">
+    <div class="row">
+        @*<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <div class="prs_heading_section_wrapper1">
+                <h2>Video & photos</h2>
+            </div>
+        </div>*@
+        <div class="prs_vp_main_slider_wrapper">
+            <!-----The left slidder-->
+            <div class="prs_vp_left_slidebar_wrapper">
+                <div class="wrap-album-slider">
+                    <ul class="prs_vp_left_slider">
+
+                        @foreach (var item in Model.EventList)
+                        {
+                            <li class="album-slider__item prs_vp_hover_overlay">
+                                <figure class="album">
+                                    <div class="prs_vp_img_overlay">
+
+                                        <img src="@item.EventImageName" alt="vp_img" width="150" height="150"><a href="@item.EventImageName" class="venobox info" data-title="@item.EventTitle" data-gall="gall12"><i class="fa fa-search"></i></a>
+                                    </div>
+                                </figure>
+                                <!-- End album -->
+                            </li>
+                        }
+
+                    </ul>
+                </div>
+            </div>
+            <!-----The center slidder-->
+            <div class="prs_vp_center_slidebar_wrapper">
+                <div class="prs_vp_center_slider">
+                    <div class="owl-carousel owl-theme">
+                        @foreach (var item in Model.EventList)
+                        {
+                            <div class="item">
+                                <div class="prs_vp_center_slider_img_wrapper">
+                                    <img src="@item.EventImageName" alt="vp_img" width="400" height="370">
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+            <!-----The right slidder-->
+            <div class="prs_vp_right_slidebar_wrapper">
+                <div class="wrap-album-slider">
+                    <ul class="prs_vp_right_slider">
+                        @foreach (var i in Model.EventList)
+                        {
+                            <li class="album-slider__item prs_vp_hover_overlay">
+                                <figure class="album">
+                                    <div class="prs_vp_img_overlay">
+                                        <img src="@i.EventImageName" alt="vp_img" width="150" height="150">	<a href="@i.EventImageName" class="venobox info" data-title="@i.EventTitle" data-gall="gall12"><i class="fa fa-search"></i></a>
+                                    </div>
+                                </figure>
+                                <!-- End album -->
+                            </li>
+                        }
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="prs_ec_pe_slider_main_wrapper">
+   
+    <div class="prs_ec_pe_slider_img_overlay"></div>
+    
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="prs_ec_pe_heading_section_wrapper1">
+                    <h2>FEATURED EVENTS</h2>
+                </div>
+            </div>
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="prs_feature_slider_wrapper">
+                    <div class="row">
+                        @using (Html.BeginForm("EventTicket", "Events", FormMethod.Post, new { id = "fooForm" }))
+                        {
+                            @Html.AntiForgeryToken()
+                            foreach (var i in Model.EventList)
+                            {
+                                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6 prs_upcom_slide_first">
+                                    <div class="prs_upcom_movie_box_wrapper">
+                                        <div class="prs_upcom_movie_img_box">
+                                            <img src="@i.EventImageName" alt="movie_img" width="400" height="380" class="spoiler" />
+                                            <div class="prs_upcom_movie_img_overlay"></div>
+                                            <div class="prs_upcom_movie_img_btn_wrapper">
+
+                                                <ul>
+                                                    <li>
+                                                        <button class="btnSubmit" type="submit" value="@i.Itbid" name="TicketType" id="TicketType"> Buy Ticket</button>
+                                                    </li>
+                                                    <li>
+                                                        <a href="javascript:void(0)" class="btnViewDetails" data-toggle="modal" data-target="#eventModal-@i.Itbid" data-src="@i.EventImageName" data-title="@i.EventTitle">View Details</a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div class="prs_upcom_movie_content_box">
+                                            <div class="prs_upcom_movie_content_box_inner">
+                                                <h6 style="font-weight:bold" ><strong class="h6Text">@i.EventTitle</strong></h6>
+                                                <button class="btnSubmit1" type="submit" value="@i.Itbid" name="TicketType" id="TicketType" style="font-weight:bold"> Buy Ticket</button>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                                
+
+                                
+
+                                
+                            }
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+<script src="~/js/jquery_min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1/crypto-js.js"></script>
+<script src="~/js/ticketplanetjs/scriptFiles.js"></script>
+
+<script type="text/javascript">
+    $(function() {
+        $('a#TicketType').click(function() {
+            $('form#fooForm').submit();
+        });
+    });
+    function SearchMovie()
+    {
+       //alert("test")
+      var input = document.getElementById("textSearchEvent");
+      var filter = input.value.toLowerCase();
+      var nodes = document.getElementsByClassName('col-lg-3 col-md-3 col-sm-6 col-xs-6 prs_upcom_slide_first');
+
+      for (i = 0; i < nodes.length; i++) {
+          if (nodes[i].innerText.toLowerCase().includes(filter))
+          {
+          nodes[i].style.display = "block";
+        } else {
+          nodes[i].style.display = "none";
+        }
+      }
+    }
+</script>
+
+<script>
+    $(document).ready(function () {
+        var text = document.getElementsByClassName('h6Text');
+        for (var i = 0; i < text.length; i++) {
+            var words = text[i].innerText.substring(0, 25);
+            //console.log(text[i].innerText);
+            document.getElementsByClassName('h6Text').innerText = words;
+            
+        }
+    });
+</script>

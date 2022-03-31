@@ -1,0 +1,466 @@
+﻿@model TicketPlanetV2.BAL.GenericModel.ViewModel.GenericViewModel
+@{
+    ViewBag.Title = "PaymentConfirmation";
+}
+<style>
+    /*---------------- st Booking Type wrapper End --------------*/
+    /*---------------- st Booking Conformation Start --------------*/
+    .st_bcc_main_wrapper {
+        padding-top: 100px;
+        padding-bottom: 100px;
+        display: inline-block;
+        width: 100%;
+        text-align: left;
+    }
+
+    .st_bcc_heading_wrapper {
+        text-align: center;
+        border-bottom: 2px solid #D8D8D8;
+        padding-bottom: 60px;
+    }
+
+        .st_bcc_heading_wrapper i {
+            font-size: 60px;
+            color: #6cc77c;
+        }
+
+        .st_bcc_heading_wrapper h3 {
+            padding-top: 30px;
+            font-size: 32px;
+            color: rgba(0,0,0,0.54);
+            letter-spacing: 0.5px;
+        }
+
+            .st_bcc_heading_wrapper h3 span {
+                font-size: 32px;
+                color: rgba(0,0,0,0.87);
+                letter-spacing: 0.5px;
+                font-weight: 600;
+            }
+
+    .st_bcc_ticket_boxes_wrapper {
+        background: #FFFFFF;
+        border-radius: 8px;
+        box-shadow: 0 2px 8px 0 rgba(0,0,0,0.12);
+        position: relative;
+        margin-top: 60px;
+        padding: 30px;
+        height: 500px;
+    }
+
+        .st_bcc_ticket_boxes_wrapper:after {
+            content: '';
+            width: 50px;
+            height: 50px;
+            background: rgb(247, 247, 247);
+            position: absolute;
+            left: -25px;
+            top: 30%;
+            border-radius: 100%;
+        }
+
+        .st_bcc_ticket_boxes_wrapper:before {
+            content: '';
+            width: 50px;
+            height: 50px;
+            background: rgb(247, 247, 247);
+            position: absolute;
+            right: -25px;
+            top: 30%;
+            border-radius: 100%;
+        }
+
+    .st_bcc_tecket_top_hesder {
+        text-align: center;
+        padding-top: 30px;
+        padding-bottom: 60px;
+        border-bottom: 1px dashed #979797;
+    }
+
+        .st_bcc_tecket_top_hesder p {
+            font-size: 24px;
+            color: #ff4444;
+            text-transform: uppercase;
+            font-weight: 600;
+        }
+
+        .st_bcc_tecket_top_hesder span {
+            font-size: 16px;
+            color: rgba(0,0,0,0.38);
+            text-align: center;
+            font-weight: 600;
+            padding-top: 10px;
+            display: inline-block;
+        }
+
+    .st_bcc_tecket_bottom_right_wrapper {
+        float: left;
+        width: 200px;
+        text-align: center;
+        padding-left: 47px;
+    }
+
+    .st_bcc_tecket_bottom_left_wrapper {
+        float: left;
+        width: calc(100% - 200px);
+        position: relative;
+    }
+
+    .st_purchase_img {
+        position: absolute;
+        top: 50px;
+        right: 220px;
+    }
+
+    .st_purchase_img2 {
+        right: 190px;
+    }
+
+    .st_bcc_tecket_bottom_left_wrapper:after {
+        content: '';
+        background: #ded0d0;
+        height: 1px;
+        width: 100%;
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: -15px;
+    }
+
+    .st_bcc_tecket_bottom_hesder {
+        background: rgba(216,216,216,0.12);
+        padding: 30px;
+        margin-top: 40px;
+    }
+
+    .st_bcc_tecket_bottom_inner_left {
+        float: left;
+        width: auto;
+    }
+
+    .st_bcc_tecket_bottom_inner_right {
+        float: right;
+        width: auto;
+        text-align: center;
+    }
+
+    .st_bcc_teckt_bot_inner_img {
+        float: left;
+        width: auto;
+    }
+
+    .st_bcc_teckt_bot_inner_img_cont {
+        float: left;
+        width: auto;
+        padding-left: 20px;
+    }
+
+        .st_bcc_teckt_bot_inner_img_cont h4 {
+            font-size: 16px;
+            color: rgba(0,0,0,0.87);
+            letter-spacing: 0.57px;
+            font-weight: 800;
+        }
+
+        .st_bcc_teckt_bot_inner_img_cont h5 {
+            font-size: 14px;
+            color: rgba(0,0,0,0.87);
+            letter-spacing: 0.7px;
+            padding-top: 5px;
+            font-weight: 500;
+        }
+
+        .st_bcc_teckt_bot_inner_img_cont h3 {
+            font-size: 14px;
+            color: rgba(0,0,0,0.87);
+            letter-spacing: 0.7px;
+            padding-top: 10px;
+            font-weight: 500;
+        }
+
+        .st_bcc_teckt_bot_inner_img_cont h6 {
+            font-size: 14px;
+            color: rgba(0,0,0,0.87);
+            letter-spacing: 0.7px;
+            font-weight: 500;
+            padding-top: 15px;
+            line-height: 19px;
+        }
+
+    .st_bcc_tecket_bottom_inner_right i {
+        color: #111;
+        font-size: 26px;
+    }
+
+    .st_bcc_main_main_wrapper {
+        text-align: center;
+    }
+
+    .st_bcc_tecket_bottom_inner_right h3 {
+        font-size: 16px;
+        color: rgba(0,0,0,0.87);
+        letter-spacing: 0.8px;
+        text-align: center;
+        line-height: 21px;
+        font-weight: 600;
+        padding-top: 10px;
+    }
+
+        .st_bcc_tecket_bottom_inner_right h3 span {
+            font-size: 12px;
+        }
+
+    .st_bcc_tecket_bottom_right_wrapper h4 {
+        font-size: 16px;
+        color: rgba(0,0,0,0.87);
+        letter-spacing: 1px;
+        padding-top: 10px;
+        line-height: 25px;
+    }
+
+    .st_bcc_tecket_bottom_left_price_wrapper {
+        float: left;
+        width: calc(100% - 200px);
+    }
+
+        .st_bcc_tecket_bottom_left_price_wrapper h4 {
+            float: left;
+            font-size: 18px;
+            color: rgba(0,0,0,0.87);
+            letter-spacing: 0.9px;
+            font-weight: 700;
+        }
+
+        .st_bcc_tecket_bottom_left_price_wrapper h5 {
+            float: right;
+            font-size: 18px;
+            color: rgba(0,0,0,0.87);
+            letter-spacing: 0.9px;
+            font-weight: 700;
+        }
+
+    .st_bcc_ticket_boxes_bottom_wrapper {
+        text-align: center;
+    }
+
+        .st_bcc_ticket_boxes_bottom_wrapper p {
+            font-size: 16px;
+            color: rgba(0,0,0,0.87);
+            letter-spacing: 0.57px;
+            text-align: center;
+            line-height: 24px;
+            margin-top: 30px;
+        }
+
+        .st_bcc_ticket_boxes_bottom_wrapper ul {
+            display: inline-block;
+            margin-top: 30px;
+        }
+
+        .st_bcc_ticket_boxes_bottom_wrapper li {
+            float: left;
+            margin-right: 10px;
+        }
+
+            .st_bcc_ticket_boxes_bottom_wrapper li:first-child a {
+                width: 150px;
+                height: 50px;
+                line-height: 50px;
+                text-align: center;
+                float: left;
+                background: #ff4444;
+                font-size: 12px;
+                font-weight: 600;
+                color: #fff;
+                letter-spacing: 1px;
+                text-transform: uppercase;
+                border-radius: 5px;
+                border: 1px solid #ff4444;
+                -webkit-transition: all 0.5s;
+                -o-transition: all 0.5s;
+                -ms-transition: all 0.5s;
+                -moz-transition: all 0.5s;
+                transition: all 0.5s;
+            }
+
+                .st_bcc_ticket_boxes_bottom_wrapper li:first-child a:hover {
+                    background: transparent;
+                    color: #ff4444;
+                    -webkit-transition: all 0.5s;
+                    -o-transition: all 0.5s;
+                    -ms-transition: all 0.5s;
+                    -moz-transition: all 0.5s;
+                    transition: all 0.5s;
+                }
+
+            .st_bcc_ticket_boxes_bottom_wrapper li:last-child a {
+                width: 150px;
+                height: 50px;
+                line-height: 50px;
+                text-align: center;
+                float: left;
+                background: transparent;
+                font-size: 12px;
+                font-weight: 600;
+                color: #ff4444;
+                letter-spacing: 1px;
+                text-transform: uppercase;
+                border-radius: 4px;
+                border: 1px solid #ff4444;
+                -webkit-transition: all 0.5s;
+                -o-transition: all 0.5s;
+                -ms-transition: all 0.5s;
+                -moz-transition: all 0.5s;
+                transition: all 0.5s;
+            }
+
+                .st_bcc_ticket_boxes_bottom_wrapper li:last-child a:hover {
+                    background: #ff4444;
+                    color: #fff;
+                    border: 1px solid #ff4444;
+                    -webkit-transition: all 0.5s;
+                    -o-transition: all 0.5s;
+                    -ms-transition: all 0.5s;
+                    -moz-transition: all 0.5s;
+                    transition: all 0.5s;
+                }
+
+    .st_bcc_heading_wrapper h4 {
+        font-size: 16px;
+        color: rgba(0,0,0,0.87);
+        letter-spacing: 1px;
+        font-weight: 800;
+    }
+
+    .st_bcc_heading_wrapper_history {
+        padding-bottom: 0;
+        border: 0;
+    }
+
+    .st_bcc_ticket_boxes_wrapper_history {
+        margin-top: 30px;
+    }
+
+    .booking_history_span {
+        font-size: 18px !important;
+        color: rgba(0,0,0,0.38) !important;
+        font-weight: 600 !important;
+    }
+
+    .st_bcc_heading_wrapper_history_second {
+        margin-top: 60px;
+    }
+
+    .st_bcc_ticket_boxes_bottom_wrapper h5 {
+        padding-top: 50px;
+    }
+
+        .st_bcc_ticket_boxes_bottom_wrapper h5 a {
+            font-size: 14px;
+            color: #F06292;
+            letter-spacing: 0.7px;
+            font-weight: 600;
+            text-decoration: underline;
+        }
+
+    .st_bcc_main_wrapper_history {
+        padding-bottom: 0;
+    }
+
+    .booking_type_back {
+        background: #f6f6f6;
+    }
+</style>
+
+<div class="st_bcc_main_main_wrapper float_left">
+    <div class="st_bcc_main_wrapper">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="st_bcc_heading_wrapper float_left">
+                        <i class="fa fa-check-circle"></i>
+                        <h3>Payment of <span> (₦) @Model.FormattedAmount(Convert.ToDecimal(Model.tk_CinemaTransactionLog.TotalAmount))</span> Complete successfull</h3>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="st_bcc_ticket_boxes_wrapper float_left">
+                        <div class="st_bcc_tecket_top_hesder float_left">
+                            <p>Your Booking for @Model.tk_CinemaTransactionLog.MovieName is Confirmed!</p>	<span>Filmhouse Booking ID @Model.tk_CinemaTransactionLog.BookingRef </span>
+                        </div>
+                        <div class="st_bcc_tecket_bottom_hesder float_left">
+                            <div class="st_bcc_tecket_bottom_left_wrapper">
+                                <div class="st_bcc_tecket_bottom_inner_left">
+                                    <div class="st_bcc_teckt_bot_inner_img">
+                                        Trans. Date: @Model.FormatDate(Model.tk_CinemaTransactionLog.TransactionDate)
+                                    </div>
+                                    <div class="st_bcc_teckt_bot_inner_img_cont">
+                                        <h4>@Model.tk_CinemaTransactionLog.ContactFullname</h4>
+                                        <h5>@Model.GetFilmHouseLocation(Model.tk_CinemaTransactionLog.SiteId)</h5>
+
+                                        <h6>
+                                            @Model.tk_CinemaTransactionLog.MovieDate
+                                        </h6>
+                                        <h6>
+                                            @Model.tk_CinemaTransactionLog.MovieTime
+                                        </h6>
+
+                                        <h6>
+                                            @Model.tk_CinemaTransactionLog.ContactFullname
+                                        </h6>
+
+                                        <h6>
+                                            @Model.tk_CinemaTransactionLog.ContactEmail
+                                        </h6>
+
+                                        <h6>
+                                            @Model.tk_CinemaTransactionLog.ContactPhoneNo
+                                        </h6>
+                                    </div>
+                                    <div class="st_purchase_img">
+                                        <img src="~/images/content/pur2.png" alt="img">
+                                    </div>
+                                </div>
+                                <div class="st_bcc_tecket_bottom_inner_right">
+                                    <i class="fas fa-chair"></i>
+                                    <h3>
+                                        @Model.tk_CinemaTransactionLog.Units TICKETS <br>
+
+                                    </h3>
+                                </div>
+                            </div>
+                            <div class="st_bcc_tecket_bottom_right_wrapper">
+                                <img src="~/images/content/qr.png" alt="img">
+                                <h4>Booking ID<br>@Model.tk_CinemaTransactionLog.BookingRef</h4>
+                            </div>
+                            <div class="st_bcc_tecket_bottom_left_price_wrapper">
+                                <h4>Total Amount</h4>
+                                <h5>(₦) @Model.FormattedAmount(Convert.ToDecimal(Model.tk_CinemaTransactionLog.TotalAmount))</h5>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="st_bcc_ticket_boxes_bottom_wrapper float_left">
+                        <p>
+                            Your electronic ticket is stored in our computer reservations system. This e-ticket receipt/itinerary is your record of your electronic ticket and forms part of your
+                            contract of carriage.
+                        <p><b>Your next email contains the ticket(s) you purchased. if you don't receive the email within 10minutes, Kindly contact us.</b></p>
+
+                        </p>
+                        <ul>
+                            <li>
+                                <a href="@Url.Action("Index", "Home")">Go Home</a>
+
+                            </li>
+
+                            <li>
+
+                                <a id="btnPrint" href="@Url.Action("Index", "Home")">Print Receipt</a>
+                            </li>
+
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

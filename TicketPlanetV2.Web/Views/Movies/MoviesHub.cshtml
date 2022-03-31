@@ -1,0 +1,109 @@
+﻿
+@{
+    ViewBag.Title = "MoviesHub";
+}
+<style>
+    .MovieImage:hover {
+        cursor: pointer;
+        opacity: 0.5;
+    }
+
+    .headerProp {
+        text-transform: capitalize;
+        font-weight: 700;
+        font-size: 25px;
+        color: #F44336;
+        text-align: center;
+    }
+
+
+
+
+    a {
+        color: white;
+        text-decoration: none;
+    }
+
+    .arrow {
+        text-align: center;
+    }
+
+    .bounce2 {
+        -moz-animation: bounce 2s infinite;
+        -webkit-animation: bounce 2s infinite;
+        animation: bounce 2s infinite;
+    }
+
+    @@keyframes bounce {
+        0%, 20%, 50%, 80%, 100% {
+            transform: translateY(0);
+        }
+
+        40% {
+            transform: translateY(-30px);
+        }
+
+        60% {
+            transform: translateY(-15px);
+        }
+    }
+</style>
+
+<style>
+    @@media only screen and (max-width:360px) {
+        .film1, .film2, .film3 {
+            min-height: 100px;
+        }
+    }
+
+    @@media only screen and (max-width:420px) {
+        .film1, .film2, .film3 {
+            min-height: 100px;
+        }
+    }
+
+    @@media only screen and (max-width:800px) {
+        .film1, .film2, .film3 {
+            max-height: 250px;
+            width: 100%;
+        }
+    }
+
+    @@media only screen and (max-width:1100px) {
+        .film1, .film2, .film3 {
+            max-height: 300px;
+            width: 100%;
+        }
+    }
+</style>
+<div style="background-color:black">
+    @*<a href="@Url.Action("Index", "Home")" class="text-blue" style="color:white;">
+            <i class="fa fa-arrow-left"></i><b> Back</b>
+        </a>*@
+    <p style="text-align:center"><b style="color:white;">Select Cinema</b></p>
+    <div class="arrow bounce2">
+
+        <a class="fa fa-arrow-down fa-2x" href="#"></a>
+
+    </div>
+</div>
+<div class="prs_upcom_slider_main_wrapper">
+    <div class="container">
+        <div class="row">
+           
+                    @*<img src="~/images/MoviesHub/movieCats1.png" />*@
+                    <a href="@Url.Action("MoviesHome", "Movies")">
+                        <img class="film1" src="~/images/MoviesHub/movieCats1.png" />
+                    </a>
+                    <a href="@Url.Action("FilmHouse", "Movies")">
+                        <img class="film2" src="~/images/MoviesHub/movieCats2.png" />
+                    </a>
+                    <a href="@Url.Action("MarturionHome", "Movies")">
+                        <img class="film3" src="~/images/MoviesHub/movieCats3.png" />
+                    </a>
+                
+
+            </div>
+
+        </div>
+    </div>

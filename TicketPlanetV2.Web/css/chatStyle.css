@@ -1,0 +1,52 @@
+﻿@media only screen and (max-width: 1090px) {
+            .chatMobile {
+                display: block;
+                position:fixed;
+                bottom:0px;
+                left:0px;
+                border:none;
+            }
+
+            .chatWeb {
+                display: none;
+                
+            }
+}
+
+ @media only screen and (min-width: 1090px) {
+            .chatMobile {
+                display: none;
+            }
+
+            .chatWeb {
+                display: block;
+                position: fixed;
+                bottom: 20px;
+                left: 1px;
+                border: none;
+                border-radius: 4px;
+            }
+}
+
+        /*.chatMobile {
+            position: fixed;
+            bottom: 20px;
+            left: 1px;
+            border: none;
+            border-radius: 4px;
+            
+        }*/
+
+        /*.chatWeb {
+            position: fixed;
+            bottom: 20px;
+            left: 1px;
+            border: none;
+            border-radius: 4px;
+        }*/
+
+        .bounce1 {
+            -moz-animation: bounce 2s infinite;
+            -webkit-animation: bounce 2s infinite;
+            animation: bounce 2s infinite;
+        }

@@ -1,0 +1,92 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Test</title>
+</head>
+<body>
+    <div>
+        <select id="drpCinemaCompany" class="form-control" onchange="GetCinemaLoactions()">
+            <option value="1">Genesis Cinema's</option>
+            <option value="2">Film House Cinema's</option>
+            <option value="3">Maturion Cinema's</option>
+        </select>
+        <select id="Locations"></select>
+
+    </div>
+</body>
+</html>
+<script src="~/js/jquery_min.js"></script>
+<script>
+    jQuery(document).ready(function () {
+         var cinema = $("#drpCinemaCompany").val();
+        $.ajax({
+                            url: "@Url.Action("GetCinemaLocation", "Movies")",
+                            data: { cinema: cinema },
+                            dataType: "json",
+                            type: "POST",
+
+                            success: function (data) {
+
+                                $("#Locations").html("");
+                                $("#Locations").append($('<option></option>').val(null).html("To Destination"));
+
+                                $.each(data, function (item, lct) {
+                                    // alert(lct.LocationName)
+                                    $("#Locations").append($('<option></option>').val(lct.Itbid).html(lct.CinemaName))
+                                })
+                            }
+        });
+
+
+
+
+        @*var jsdata = '{cinema:' + 1 + '}';
+        $.ajax({
+            type: "POST",
+            url:"@Url.Action("GetCinemaLocation", "Movies")",
+            dataType: "json",
+            contentType: "application/json",
+             data: jsdata,
+            success: function (res)
+                {
+                    //var states = [{"stateId":"01","StateName":"Arizona"},{"stateId":"02","StateName":"Alabama"}];
+                var states = states;
+                    var $select = $('#Locations');
+                    $.each(states, function(i, state) {
+                        console.log(state);
+                        alert(state.CinemaName)
+                        alert(state.Itbid)
+                    var option = $('<option>', {
+                    value: state.Itbid
+                    }).html(state.CinemaName).appendTo($select);
+                    console.log(option);
+                    });
+                }
+
+        });*@
+
+
+
+
+
+       var states = [{"stateId":"01","StateName":"Arizona"},{"stateId":"02","StateName":"Alabama"}];
+        var $select = $('#StateID');
+        $.each(states, function(i, state) {
+        console.log(state);
+        var option = $('<option>', {
+        value: state.stateId
+        }).html(state.StateName).appendTo($select);
+        console.log("options",option);
+        });
+
+
+
+});
+</script>

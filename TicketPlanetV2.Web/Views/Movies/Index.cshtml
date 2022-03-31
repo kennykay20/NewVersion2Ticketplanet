@@ -1,0 +1,234 @@
+﻿@model TicketPlanetV2.BAL.GenericModel.ViewModel.GenericViewModel
+
+<style>
+    .loaderbody {
+        width: 100%;
+        height: 200%;
+        left: 0px;
+        top: 30%;
+        position: absolute;
+        background-color: rgba(128, 128, 128, 0.2);
+        z-index: 2147453647;
+    }
+
+    .loader {
+        border: 8px solid #f3f3f3;
+        border-top: 8px solid #3498db;
+        border-right: 8px solid #3498db;
+        border-bottom: 8px solid #3498db;
+        border-radius: 50%;
+        width: 50px;
+        height: 50px;
+        animation: spin 1s linear infinite;
+        position: fixed;
+        top: 45%;
+        left: 50%;
+    }
+
+    @@keyframes spin {
+        0% {
+            transform: rotate(0deg);
+        }
+
+        100% {
+            transform: rotate(360deg);
+        }
+    }
+
+    .loaderbody p {
+        position: fixed;
+        top: 55%;
+        left: 45%;
+        text-align: center;
+        color: #f3f3f3;
+    }
+
+    #loading {
+        width: 100%;
+        height: 100%;
+        top: 0px;
+        left: 0px;
+        position: fixed;
+        display: none;
+        opacity: .9;
+        background-color: #fff;
+        z-index: 99;
+        text-align: center;
+    }
+
+    #loading-image {
+        position: absolute;
+        top: 250px;
+        left: 550px;
+        z-index: 600;
+    }
+
+    /*button:hover {
+        border-color: #2196F3;
+    }*/
+</style>
+<style>
+    .prs_upcom_slider_main_wrapper{
+        /*background:url('../images/content/theater_bg.jpg');*/
+        /*background:url('../images/content/2.png');*/
+        background-color:rgba(0, 0, 0, 0.8);
+	    background-size:cover;
+	    background-position:center 0;
+        background-repeat: repeat;
+    }
+
+    @@media only screen and (min-width: 800px) {
+        .prs_upcom_movie_content_box_inner h6{
+            font-size: 10px;
+        }
+    }
+    @@media only screen and (max-width: 800px) {
+        .prs_upcom_movie_content_box_inner h6{
+            font-size: 13px;
+        }
+    }
+</style>
+
+<div class="prs_upcom_slider_main_wrapper">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="prs_heading_section_wrapper">
+                    <h2 style="color:white;"> Movies</h2>
+                </div>
+            </div>
+
+            <div class="tab-content">
+                <div role="tabpanel" class="tab-pane fade in active" id="best">
+
+                    <div class="row">
+                        <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+
+                            <div class="prs_contact_input_wrapper form-group">
+                                <select id="drpCinemaCompany" class="form-control" onchange="GetCinemaLoactions()" style="width:100%">
+
+                                    <option value="1">Genesis Cinema's</option>
+                                    <option value="3">Film House Cinema's</option>
+                                    <option value="2">Maturion Cinema's</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+
+                            <div class="prs_contact_input_wrapper">
+                                <select id="drpLocation" class="form-control" style="width:100%;">
+                                </select>
+
+                            </div>
+                        </div>
+
+                        <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+
+                            <div class="prs_contact_input_wrapper">
+                                <input type="text" id="textSearchMovie" onkeyup="SearchMovie()" placeholder="Search for Movie Name..." style="height:30px;" />
+
+                            </div>
+                            
+                        </div>
+                    </div>
+
+                    <div class="prs_upcom_slider_slides_wrapper" id="FilmHouse" style="display:none">
+                        <div class="owl-carou">
+                            <div class="item">
+                                <div class="row">
+                                    <div id="OthersFilmHouse">
+                                        
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+</div>
+<div class="loaderbody" id="loaderbody" style="display:none;">
+    <div class="loader"></div>
+    <p style="text-align:center; color:blue;"><b>...loading please...</b></p>
+</div>
+<script src="~/js/jquery_min.js"></script>
+<script src="~/js/ticketplanetjs/scriptFiles.js"></script>
+<script>
+    jQuery(document).ready(function () {
+        //alert("Test")
+        $("#loaderbody").show();
+        var cinema = $("#drpCinemaCompany").val();
+        //alert(cinema);
+        
+        $.ajax({
+        url: "@Url.Action("GetCinemaLocation", "Movies")",
+        data: { cinema: cinema },
+        dataType: "json",
+        type: "POST",
+
+            success: function (data)
+            {
+                //console.log("Result",data)
+                $("#drpLocation").html("");
+                $.each(data, function (item, lct) {
+                    // alert(lct.LocationName)
+                    $("#drpLocation").append($('<option></option>').val(lct.Itbid).html(lct.CinemaName))
+                })
+                $('#drpLocation').val(3);
+                //$("#drpLocation").niceSelect('update'); //Tell the plugin to recreate the DIV.
+                //$("#loaderbody").hide();
+            }
+        });
+          $("#drpLocation").val(3);
+          var company = $('#drpCinemaCompany').val();
+          var location = 1;
+
+        //alert(company)
+        //alert(location)
+    if (location != null && company != null)
+    {
+        $('#OthersFilmHouse').html('');
+        $.ajax({
+            url:  "@Url.Action("GetMoviesViaLocation", "Movies")",
+            type: 'POST',
+            cache: false,
+            dataType: 'html',
+            data: { company: company, location: 3},
+            success: function (data, textStatus, XMLHttpRequest) {
+                if (data !== null)
+                {
+
+                    $('#FilmHouse').show();
+                    $('#OthersFilmHouse').html('');
+                    $('#OthersFilmHouse').html(data);
+                    
+                    $("#loaderbody").hide();
+                }
+
+                $("#loaderbody").hide();
+            },
+
+            error: function (xhr, ajaxOptions, thrownError) {
+                $('#screenDiv').hide();
+                $("#loaderbody").hide();
+            },
+
+
+        });
+
+    }
+    });
+
+
+</script>
+
+<div id="GetMovies" style="display:none" data-request-url="@Url.Action("GetMoviesViaLocation", "Movies")"></div>
+<div id="GetCinemaCompnies" style="display:none" data-request-url="@Url.Action("GetCinemaLocation", "Movies")"></div>
+

@@ -1,0 +1,212 @@
+﻿@model TicketPlanetV2.BAL.GenericModel.ViewModel.GenericViewModel
+   
+<!-- prs Slider Start -->
+@if (Model.sliderImages != null)
+{
+<div class="prs_main_slider_wrapper">
+    <div class="prs_top_main_slider_wrapper">
+        @*<a href="@Url.Action("Index", "Movies")">
+
+        </a>*@
+        <a href="@Url.Action("Flights", "Events")">
+            <div class="img_main">
+                <img src="@Model.sliderImages.Slider1">
+            </div>
+        </a>
+        <a href="@Url.Action("Index", "Movies")">
+            <div class="img_main">
+                <img src="@Model.sliderImages.Slider2">
+            </div>
+        </a>
+        <a href="@Url.Action("Index", "Events")">
+            <div class="img_main">
+                <img src="@Model.sliderImages.Slider3">
+            </div>
+        </a>
+        <a href="@Url.Action("Flights", "Events")">
+            <div class="img_main">
+                <img src="@Model.sliderImages.Slider4">
+            </div>
+        </a>
+            @*<a href="@Url.Action("Index", "Movies")">
+
+            </a>*@
+            <a href="@Url.Action("DubaiTourTicket", "Home", new { TicketType = 1282 })">
+                <div class="img_main">
+                    <img src="@Model.sliderImages.SliderCategory">
+                </div>
+            </a>
+
+    </div>
+</div>
+
+<div class="prs_slider_upcoming_main_wrapper">
+    <div class="prs_slider_upcom_heading_wrapper">
+        <div class="prs_slider_upcom_heading_img_overlay"></div>
+        <h3>
+            latest and <br>
+            upcoming <br>
+            movies
+        </h3>
+    </div>
+    <div class="prs_slider_upcom_heading_slider_wrapper">
+        <div class="prs_top_main_upcom_slider_wrapper">
+            <div class="img_main_up">
+                <img src="@Model.sliderImages.Slider5">
+                <h4><a href="@Url.Action("Index", "Movies")"><span style="font-weight:bolder; font-style:normal;color:black">Get Ticket</span></a></h4>
+            </div>
+            <div class="img_main_up">
+                <img src="@Model.sliderImages.Slider6">
+                <h4><a href="@Url.Action("Index", "Movies")"><span style="font-weight:bolder; font-style:normal;color:black">Get Ticket</span></a></h4>
+            </div>
+            <div class="img_main_up">
+                <img src="@Model.sliderImages.Slider7">
+                <h4><a href="@Url.Action("Index", "Movies")"><span style="font-weight:bolder; font-style:normal;color:black">Get Ticket</span></a></h4>
+            </div>
+            <div class="img_main_up">
+                <img src="@Model.sliderImages.TransportHeader">
+                <h4><a href="@Url.Action("Index", "Movies")"><span style="font-weight:bolder; font-style:normal;color:black">Get Ticket</span></a></h4>
+            </div>
+            <div class="img_main_up">
+                <img src="@Model.sliderImages.HomePageBox1">
+                <h4><a href="@Url.Action("Index", "Movies")"><span style="font-weight:bolder; font-style:normal;color:black">Get Ticket</span></a></h4>
+            </div>
+            <div class="img_main_up">
+                <img src="@Model.sliderImages.HomePageBox2">
+                <h4><a href="@Url.Action("Index", "Movies")"><span style="font-weight:bolder; font-style:normal;color:black">Get Ticket</span></a></h4>
+            </div>
+            <div class="img_main_up">
+                <img src="@Model.sliderImages.HomePageBox1Category2">
+                <h4><a href="@Url.Action("Index", "Movies")"><span style="font-weight:bolder; font-style:normal;color:black">Get Ticket</span></a></h4>
+            </div>
+            <div class="img_main_up">
+                <img src="@Model.sliderImages.HomePageBox3">
+                <h4><a href="@Url.Action("Index", "Movies")"><span style="font-weight:bolder; font-style:normal;color:black">Get Ticket</span></a></h4>
+            </div>
+            <div class="img_main_up">
+                <img src="@Model.sliderImages.HomePageBox1Category3">
+                <h4><a href="@Url.Action("Index", "Movies")"><span style="font-weight:bolder; font-style:normal;color:black">Get Ticket</span></a></h4>
+            </div>
+
+
+        </div>
+    </div>
+</div>
+
+}
+<!-- prs theater Slider Start -->
+<div class="prs_theater_main_slider_wrapper">
+    <div class="prs_theater_img_overlay"></div>
+    <div class="prs_theater_sec_heading_wrapper">
+        <h2>Event pro special</h2>
+    </div>
+    <div class="wrap-album-slider wrap-album-slider-top-slider">
+        <ul class="album-slider">
+
+            @foreach (var i in Model.EventList)
+            {
+                <li class="album-slider__item">
+                    <figure class="album">
+                        <div class="prs_upcom_movie_box_wrapper">
+                            <div class="prs_upcom_movie_img_box">
+                                <img src="@i.EventImageName" alt="movie_img" width="500" height="360" />
+                                <div class="prs_upcom_movie_img_overlay"></div>
+                                <div class="prs_upcom_movie_img_btn_wrapper">
+                                    <ul>
+                                        <li>
+                                            <a class="btnEventIndexGrid" data-key='@i.Itbid' href="javascript:void(0)">Buy Ticket</a>
+                                        </li>
+                                        <li>
+                                            <a href="javascript:void(0)" class="btnHomeDetails" data-src="@i.EventImageName" data-title="@i.EventTitle" >View Details</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="prs_upcom_movie_content_box">
+                                <div class="prs_upcom_movie_content_box_inner">
+                                    @*<h2><a href="#">@i.EventTitle</a></h2>*@
+                                    
+                                </div>
+
+                            </div>
+                        </div>
+                        <!-- End album body -->
+                    </figure>
+                    <!-- End album -->
+                    
+                    
+                </li>
+
+                
+            }
+
+        </ul>
+
+        <!-- End slider -->
+    </div>
+</div>
+
+<!-- prs letest news End -->
+<!-- prs patner slider Start -->
+<div class="prs_patner_main_section_wrapper">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="prs_heading_section_wrapper">
+                    <h2>Our Patner’s</h2>
+                </div>
+            </div>
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="prs_pn_slider_wraper">
+                    <div class="owl-carousel owl-theme">
+                        <div class="item">
+                            <div class="prs_pn_img_wrapper">
+                                <img src="~/images/Partners/download (1).jpg" height="150" width="100" />
+
+                            </div>
+                        </div>
+                        <div class="item">
+                            <div class="prs_pn_img_wrapper">
+                                <img src="~/images/Partners/download (2).jpg" height="150" width="100" />
+
+                            </div>
+                        </div>
+                        <div class="item">
+                            <div class="prs_pn_img_wrapper">
+
+                                <img src="~/images/Partners/FILMH.png" height="150" width="100" />
+                            </div>
+                        </div>
+                        <div class="item">
+                            <div class="prs_pn_img_wrapper">
+                                <img src="~/images/Partners/GENESIS.png" height="150" width="100" />
+
+                            </div>
+                        </div>
+                        <div class="item">
+                            <div class="prs_pn_img_wrapper">
+                                <img src="~/images/Partners/MARTU CINE.png" height="150" width="100" />
+
+                            </div>
+                        </div>
+                        <div class="item">
+                            <div class="prs_pn_img_wrapper">
+                                <img src="~/images/Partners/POLARIS.png" height="150" width="100" />
+
+                            </div>
+                        </div>
+                        <div class="item">
+                            <div class="prs_pn_img_wrapper">
+
+                                <img src="~/images/Partners/UBA.png" height="150" width="100" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="gotoEventTicket" style="display:none" data-request-url="@Url.Action("EventTicket", "Events")"></div>
+<script src="~/js/jquery_min.js"></script>
+<script src="~/js/ticketplanetjs/scriptFiles.js"></script>

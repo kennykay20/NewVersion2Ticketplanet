@@ -1,0 +1,288 @@
+﻿@model TicketPlanetV2.BAL.GenericModel.ViewModel.GenericViewModel
+
+<style>
+    .movieFrame{
+        
+    }
+</style>
+<style>
+    .loaderbody {
+        width: 100%;
+        height: 200%;
+        left: 0px;
+        top: 30%;
+        position: absolute;
+        background-color: rgba(128, 128, 128, 0.2);
+        z-index: 2147453647;
+    }
+
+    .loader {
+        border: 8px solid #f3f3f3;
+        border-top: 8px solid #3498db;
+        border-right: 8px solid #3498db;
+        border-bottom: 8px thin #3498db;
+        border-radius: 50%;
+        width: 50px;
+        height: 50px;
+        animation: spin 1s linear infinite;
+        position: fixed;
+        top: 45%;
+        left: 50%;
+    }
+
+    @@keyframes spin {
+        0% {
+            transform: rotate(0deg);
+        }
+
+        100% {
+            transform: rotate(360deg);
+        }
+    }
+
+    .loaderbody p {
+        position: fixed;
+        top: 55%;
+        left: 45%;
+        text-align: center;
+        color: #f3f3f3;
+    }
+
+    #loading {
+        width: 100%;
+        height: 100%;
+        top: 0px;
+        left: 0px;
+        position: fixed;
+        display: none;
+        opacity: .9;
+        background-color: #fff;
+        z-index: 99;
+        text-align: center;
+    }
+
+    #loading-image {
+        position: absolute;
+        top: 250px;
+        left: 550px;
+        z-index: 600;
+    }
+
+    button:hover {
+        border-color: #2196F3;
+    }
+</style>
+
+
+@if (Model.cinemaCompany == "3")
+{
+
+    @Html.HiddenFor(o => o.CinemaID, new { name = "CinemaId", id = "CinemaId" })
+    if (Model.ShowtimeList != null)
+    {
+        using (Html.BeginForm("FilmHouseTickets", "Movies", FormMethod.Post))
+        {
+            @Html.AntiForgeryToken()
+            foreach (var movie in Model.ShowtimeList.OrderByDescending(o => o.startDate))
+            {
+                if (!string.IsNullOrWhiteSpace(@movie.title))
+                {
+                    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6 prs_upcom_slide_first">
+                        <div class="prs_upcom_movie_box_wrapper">
+                            <div class="prs_upcom_movie_img_box">
+                                <img src="@movie.url" width="400" height="380" />
+
+                                <div class="prs_upcom_movie_img_overlay"></div>
+                                <div class="prs_upcom_movie_img_btn_wrapper">
+                                    <ul>
+                                        <li>
+                                            <a href="javascript:void(0)" class="btnViewTrailer" data-filmcode="@movie.id" data-title="@movie.title" data-src="@movie.youtube" >View Trailer</a>
+                                        </li>
+                                        <li>
+                                            <a class="btnFilmHouse" data-key='@movie.id*@movie.siteId' href="javascript:void(0)">Buy Ticket</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="prs_upcom_movie_content_box">
+                                <div class="prs_upcom_movie_content_box_inner">
+                                    <h6><b style="color:black">@movie.title</b></h6>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            }
+        }
+
+    }
+
+}
+else if (Model.cinemaCompany == "1")
+{
+
+
+    @Html.HiddenFor(o => o.CinemaID, new { name = "CinemaId", id = "CinemaId" })
+    if (Model.MovieList != null)
+    {
+        using (Html.BeginForm("MovieTicket", "Movies", FormMethod.Post))
+        {
+            @Html.AntiForgeryToken()
+            // {string demacate = " ";}
+            foreach (var i in Model.MovieList)
+            {
+                if (!string.IsNullOrWhiteSpace(i.Img_1s))
+                {
+                    // {string demacate = i.filmCode + "**" + i._FilmTitle; }
+                    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6 prs_upcom_slide_first">
+                        <div class="prs_upcom_movie_box_wrapper">
+                            <div class="prs_upcom_movie_img_box">
+                                <img src="@i.Img_1s" width="400" height="380" />
+
+                                <div class="prs_upcom_movie_img_overlay"></div>
+                                <div class="prs_upcom_movie_img_btn_wrapper">
+                                    <ul>
+                                        <li>
+                                            <a href="javascript:void(0)" class="btnViewTrailer" data-filmcode="@i.filmCode" data-title="@i._FilmTitle" data-src="@i.Youtube">View Trailer</a>
+                                        </li>
+                                        <li>
+                                          
+                                            @*<a style="display:none" class="btnGenesisFilm" data-value='@i._FilmTitle' href="#">Buy Ticket</a>*@
+                                            <a class="btnGenesis" data-key='@i.filmCode*@i._FilmTitle' href="javascript:void(0)">Buy Ticket</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="prs_upcom_movie_content_box">
+                                <div class="prs_upcom_movie_content_box_inner">
+                                    <h6><b style="color:black">@i._FilmTitle</b></h6>
+                                    <p> @i.ComingSoon</p>
+
+                                </div>
+
+                                
+                            </div>
+                        </div>
+                    </div>
+                }
+            }
+        }
+    }
+
+}
+else if (Model.cinemaCompany == "2")
+{
+
+
+    @Html.HiddenFor(o => o.CinemaID, new { name = "CinemaId", id = "CinemaId" })
+    if (Model.MovieList != null)
+    {
+        using (Html.BeginForm("MarturionTicket", "Movies", FormMethod.Post))
+        {
+            @Html.AntiForgeryToken()
+            // {string demacate = " ";}
+            foreach (var i in Model.MovieList)
+            {
+                if (!string.IsNullOrWhiteSpace(i._FilmTitle))
+                {
+                    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6 prs_upcom_slide_first">
+                        <div class="prs_upcom_movie_box_wrapper">
+                            <div class="prs_upcom_movie_img_box">
+                                <img src="@i.Img_1s" width="400" height="380" />
+
+                                <div class="prs_upcom_movie_img_overlay"></div>
+                                <div class="prs_upcom_movie_img_btn_wrapper">
+                                    <ul>
+                                        <li>
+                                            <a href="javascript:void(0)" class="btnViewTrailer" data-filmcode="@i.filmCode" data-title="@i._FilmTitle" data-src="@i.Youtube">View Trailer</a>
+                                        </li>
+                                        <li>
+
+                                            <a class="btnMaturion" data-key='@i.filmCode*@i._FilmTitle' href="#">Buy Ticket</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="prs_upcom_movie_content_box">
+                                <div class="prs_upcom_movie_content_box_inner">
+                                    <h6><b style="color:black">@i._FilmTitle</b></h6>
+                                    <p> @i.ComingSoon</p>
+
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                }
+            }
+        }
+    }
+
+}
+<script src="~/js/jquery_min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1/crypto-js.js"></script>
+<script src="~/js/ticketplanetjs/scriptFiles.js"></script>
+<script>
+
+    
+
+$(".btnGenesis").on('click', function () {
+
+    var location = $('#drpLocation').val();
+     var id = $(this).data('key');
+       if (location != null && id != null)
+       {
+           window.location = $('#otherMovies').data('request-url') + '?filmCode=' + id + '&CinemaId=' + location;
+       }
+    
+
+});
+
+$(".btnFilmHouse").on('click', function () {
+    var location = $('#drpLocation').val();
+    //  alert(location)
+    var id = $(this).data('key');
+    if (location != null && id != null) {
+        window.location = $('#filmHouseMovies').data('request-url') + '?filmId=' + id + '&SiteId=' + location;
+    }
+
+});
+
+$(".btnMaturion").on('click', function () {
+   // alert("tets")
+    var location = $('#drpLocation').val();
+    var id = $(this).data('key');
+    if (location != null && id != null)
+    {
+        window.location = $('#MaturionMovies').data('request-url') + '?filmCode=' + id + '&CinemaId=' + location;
+    }
+
+});
+
+    function SearchMovie() {
+        //alert("test")
+        //$("#loaderbody").show();
+        var input = document.getElementById("textSearchMovie");
+        var filter = input.value.toLowerCase();
+        var nodes = document.getElementsByClassName('col-lg-3 col-md-3 col-sm-6 col-xs-6 prs_upcom_slide_first');
+        //console.log(nodes);
+
+        for (i = 0; i < nodes.length; i++) {
+            
+            if (nodes[i].innerText.toLowerCase().includes(filter)) {
+                //$("#loaderbody").hide();
+                nodes[i].style.display = "block";
+            } else {
+                nodes[i].style.display = "none";
+                //$("#loaderbody").hide();
+            }
+        }
+    }
+</script>
+
+
+
+
+<div id="otherMovies" style="display:none" data-request-url="@Url.Action("MovieTicket", "Movies")"></div>
+<div id="filmHouseMovies" style="display:none" data-request-url="@Url.Action("FilmHouseTickets", "Movies")"></div>
+<div id="MaturionMovies" style="display:none" data-request-url="@Url.Action("MarturionTicket", "Movies")"></div>
